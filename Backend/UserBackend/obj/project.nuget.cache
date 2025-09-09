@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3Zj1QS6FWGM=",
+  "dgSpecHash": "vtxeaRmbYro=",
   "success": true,
-  "projectFilePath": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj",
+  "projectFilePath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\KORISNIK\\.nuget\\packages\\automapper\\15.0.1\\automapper.15.0.1.nupkg.sha512",
     "C:\\Users\\KORISNIK\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

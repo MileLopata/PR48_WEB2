@@ -4969,11 +4969,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\QuizBackend\\QuizBackend.csproj",
+      "projectUniqueName": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\QuizBackend\\QuizBackend.csproj",
       "projectName": "QuizBackend",
-      "projectPath": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\QuizBackend\\QuizBackend.csproj",
+      "projectPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\QuizBackend\\QuizBackend.csproj",
       "packagesPath": "C:\\Users\\KORISNIK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\QuizBackend\\obj\\",
+      "outputPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\QuizBackend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

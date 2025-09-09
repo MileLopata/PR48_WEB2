@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj": {}
+    "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj": {
+    "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj",
+        "projectUniqueName": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj",
         "projectName": "UserBackend",
-        "projectPath": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj",
+        "projectPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.csproj",
         "packagesPath": "C:\\Users\\KORISNIK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\KORISNIK\\Documents\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\obj\\",
+        "outputPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
