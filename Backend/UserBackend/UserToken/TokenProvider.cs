@@ -11,9 +11,9 @@ namespace UserBackend.UserToken
         public string Create(User user)
         {
             string secretKey = configuration["Jwt:SecretKey"]!;
-            var securitKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
-            var credentials = new SigningCredentials(securitKey, SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

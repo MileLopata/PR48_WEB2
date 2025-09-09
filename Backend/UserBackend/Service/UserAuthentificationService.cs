@@ -9,12 +9,12 @@ using UserBackend.UserToken;
 
 namespace UserBackend.Service
 {
-    public class UserAuthorizationService : IUserAuthorizationService
+    public class UserAuthentificationService : IUserAuthentificationService
     {
         private readonly IUserRepo _userRepo;
         private readonly TokenProvider _tokenProvider;
 
-        public UserAuthorizationService(IUserRepo userRepo, TokenProvider tokenProvider)
+        public UserAuthentificationService(IUserRepo userRepo, TokenProvider tokenProvider)
         {
             _userRepo = userRepo;
             _tokenProvider = tokenProvider;
@@ -71,7 +71,48 @@ namespace UserBackend.Service
         }
         public async Task<ResponseData<string>> Login(UserLoginDTO request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User? existingUser = await _userRepo.GetByEmailOrUsernameAsync(request.EmailOrUsername);
+
+                if (existingUser is null)
+                {
+                    return new ResponseData<string>
+                    {
+                        Status = ResponseStatus.NOT_FOUND,
+                        Message = "User not found"
+                    };
+                }
+
+                var verificationResult = new PasswordHasher<User>()
+                    .VerifyHashedPassword(existingUser, existingUser.PasswordHash, request.Password);
+
+                if (verificationResult == PasswordVerificationResult.Failed)
+                {
+                    return new ResponseData<string>
+                    {
+                        Status = ResponseStatus.UNAUTHORIZED,
+                        Message = "Invalid password"
+                    };
+                }
+
+                string token = _tokenProvider.Create(existingUser);
+
+                return new ResponseData<string>
+                {
+                    Data = token,
+                    Status = ResponseStatus.OK,
+                    Message = "Login successful"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseData<string>
+                {
+                    Status = ResponseStatus.INTERNAL_SERVER_ERROR,
+                    Message = $"An error occurred while processing your request: {ex.Message}"
+                };
+            }
         }
     }
 }

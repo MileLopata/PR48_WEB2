@@ -1,63 +1,62 @@
-﻿using UserBackend.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using UserBackend.DBHelper;
+using UserBackend.Interfaces;
 using UserBackend.Model;
 
 namespace UserBackend.Repository
 {
     public class UserRepo : IUserRepo
     {
-        public Task<User> AddAsync(User user)
+        private readonly UserDbContext _userDbContext;
+
+        public UserRepo(UserDbContext userDbContext)
         {
-            throw new NotImplementedException();
+            _userDbContext = userDbContext;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<User?> GetByIdAsync(int id) => await _userDbContext.Users.FindAsync(id);
+
+        public async Task<IEnumerable<User>> GetAllAsync() => await _userDbContext.Users.ToListAsync();
+
+        public async Task<User?> GetByEmailAsync(string email) =>
+            await _userDbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        public async Task<User?> GetByUsernameAsync(string username) =>
+            await _userDbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+
+        public async Task<User?> GetByEmailOrUsernameAsync(string emailOrUsername) =>
+            await _userDbContext.Users.FirstOrDefaultAsync(u => u.Email == emailOrUsername || u.Username == emailOrUsername);
+
+        public async Task<bool> EmailExistsAsync(string email) =>
+            await _userDbContext.Users.AnyAsync(u => u.Email == email);
+
+        public async Task<bool> UsernameExistsAsync(string username) =>
+            await _userDbContext.Users.AnyAsync(u => u.Username == username);
+
+        public async Task<User> AddAsync(User user)
         {
-            throw new NotImplementedException();
+            await _userDbContext.Users.AddAsync(user);
+            await _userDbContext.SaveChangesAsync();
+            return user;
         }
 
-        public Task<bool> EmailExistsAsync(string email)
+        public async Task<User> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            _userDbContext.Users.Update(user);
+            await _userDbContext.SaveChangesAsync();
+            return user;
         }
 
-        public Task<IEnumerable<User>> GetAllAsync()
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await GetByIdAsync(id);
+            if (user == null) return false;
+
+            _userDbContext.Users.Remove(user);
+            await _userDbContext.SaveChangesAsync();
+            return true;
         }
 
-        public Task<User?> GetByEmailAsync(string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User?> GetByEmailOrUsernameAsync(string emailOrUsername)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User?> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User?> GetByUsernameAsync(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> UpdateAsync(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UsernameExistsAsync(string username)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<int> SaveChangesAsync() => await _userDbContext.SaveChangesAsync();
     }
 }
