@@ -1,22 +1,17 @@
 // src/App.js
 
-// src/App.js
-
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/RegistrationPage';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AppRoutes } from './routes';
 
 function App() {
     return (
         <Router>
-            <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegistrationPage />} />
-                <Route path="/" element={<Navigate to="/login" replace />} />
-            </Routes>
+            <AppRoutes />
         </Router>
     );
 }
+
+localStorage.removeItem('token');
 
 export default App;

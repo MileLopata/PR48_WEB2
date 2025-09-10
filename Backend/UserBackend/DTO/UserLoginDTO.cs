@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using UserBackend.Model;
 
 namespace UserBackend.DTO
 {
@@ -8,5 +9,6 @@ namespace UserBackend.DTO
         public required string EmailOrUsername { get; init; }
 
         public required string Password { get; init; }
-    }
+        
+        }
 }

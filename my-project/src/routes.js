@@ -18,9 +18,15 @@ export function AppRoutes() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
 
-            {/* Regular user start page (protected for any logged-in user) */}
+            {/* Protected route for regular users */}
             <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
                 <Route path="/regular-start" element={<RegularUserStartPage />} />
             </Route>
-            }
+
+            {/* Protected route for admin users only */}
+            <Route element={<RoleProtectedRoute allowedRoles={['ADMIN', 'Admin']} />}>
+                <Route path="/admin-start" element={<AdminStartPage />} />
+            </Route>
+        </Routes>
+    );
 }

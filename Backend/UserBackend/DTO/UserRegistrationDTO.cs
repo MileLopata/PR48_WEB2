@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using UserBackend.Model;
 
 namespace UserBackend.DTO
 {
@@ -15,6 +16,7 @@ namespace UserBackend.DTO
 
         [Required]
         public required string Password { get; init; }
+
 
         public IFormFile? ProfilePicture { get; init; }
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 function AdminStartPage() {
+    console.log("AdminStartPage rendered")
     return (
         <div>
             <h1>Admin Dashboard</h1>
