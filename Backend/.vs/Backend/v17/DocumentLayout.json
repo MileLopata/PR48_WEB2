@@ -3,6 +3,58 @@
   "WorkspaceRootPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\userresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\userresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\userregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\userregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\userlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\userlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\controllers\\authentificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\controllers\\authentificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\model\\userauthorizationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\model\\userauthorizationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\cors\\corsvalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\cors\\corsvalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\userbackend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\userbackend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\repository\\userrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\repository\\userrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\interfaces\\iuserrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\interfaces\\iuserrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,17 +66,186 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserResponseDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\UserResponseDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\UserResponseDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\UserResponseDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\UserResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:34:09.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserRegistrationDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\UserRegistrationDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\UserRegistrationDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\UserRegistrationDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\UserRegistrationDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:34:07.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserLoginDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\UserLoginDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\UserLoginDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\UserLoginDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\UserLoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:34:02.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserAuthorizationRole.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\UserAuthorizationRole.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Model\\UserAuthorizationRole.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\UserAuthorizationRole.cs",
+              "RelativeToolTip": "UserBackend\\Model\\UserAuthorizationRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:31:37.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\User.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Model\\User.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\User.cs",
+              "RelativeToolTip": "UserBackend\\Model\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:31:30.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\appsettings.json",
+              "RelativeDocumentMoniker": "UserBackend\\appsettings.json",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\appsettings.json",
+              "RelativeToolTip": "UserBackend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-10T01:00:12.044Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CorsValidation.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\CORS\\CorsValidation.cs",
+              "RelativeDocumentMoniker": "UserBackend\\CORS\\CorsValidation.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\CORS\\CorsValidation.cs",
+              "RelativeToolTip": "UserBackend\\CORS\\CorsValidation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T00:26:07.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Controllers\\UserController.cs",
+              "RelativeToolTip": "UserBackend\\Controllers\\UserController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAuwEcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T00:01:56.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthentificationController.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Controllers\\AuthentificationController.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Controllers\\AuthentificationController.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Controllers\\AuthentificationController.cs",
+              "RelativeToolTip": "UserBackend\\Controllers\\AuthentificationController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwA4AAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T23:59:12.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Program.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Program.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Program.cs",
+              "RelativeToolTip": "UserBackend\\Program.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T23:56:59.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserBackend.http",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.http",
+              "RelativeDocumentMoniker": "UserBackend\\UserBackend.http",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.http",
+              "RelativeToolTip": "UserBackend\\UserBackend.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-09-09T23:33:18.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserRepo.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Repository\\UserRepo.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Repository\\UserRepo.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Repository\\UserRepo.cs",
+              "RelativeToolTip": "UserBackend\\Repository\\UserRepo.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAApwDEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T23:31:02.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IUserRepo.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Interfaces\\IUserRepo.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Interfaces\\IUserRepo.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Interfaces\\IUserRepo.cs",
+              "RelativeToolTip": "UserBackend\\Interfaces\\IUserRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T23:30:25.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "IUserService.cs",
               "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Interfaces\\IUserService.cs",
               "RelativeDocumentMoniker": "UserBackend\\Interfaces\\IUserService.cs",
               "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Interfaces\\IUserService.cs",
               "RelativeToolTip": "UserBackend\\Interfaces\\IUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-09T22:29:44.412Z",
               "EditorCaption": ""
