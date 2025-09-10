@@ -1,4 +1,6 @@
-﻿namespace UserBackend.Model
+﻿using UserBackend.Model.Enums;
+
+namespace UserBackend.Model
 {
     public class User
     {

@@ -1,4 +1,4 @@
-﻿using UserBackend.DTO;
+﻿using UserBackend.DTO.UserDTO;
 using UserBackend.Interfaces;
 using UserBackend.Model;
 using UserBackend.Response;

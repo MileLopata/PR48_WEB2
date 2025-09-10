@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserBackend.Model;
+using UserBackend.Model.Enums;
 
 namespace UserBackend.DBHelper
 {

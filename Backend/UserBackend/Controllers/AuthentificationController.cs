@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserBackend.DTO;
+using UserBackend.DTO.UserDTO;
 using UserBackend.Interfaces;
 using UserBackend.Response;
 
