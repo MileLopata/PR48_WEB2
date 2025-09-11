@@ -1,12 +1,173 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizdto\\createquizrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizdto\\createquizrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizdto\\quizdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizdto\\quizdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\getquizleaderboarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\getquizleaderboarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\getquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\getquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\model\\quizsolvingtry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\model\\quizsolvingtry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\useranswerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\useranswerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\useranswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\useranswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CreateQuizRequestDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:40:14.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "QuizDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:38:28.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetQuizLeaderboardDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:35:07.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "QuizSolvingTry.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\QuizSolvingTry.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Model\\QuizSolvingTry.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\QuizSolvingTry.cs",
+              "RelativeToolTip": "UserBackend\\Model\\QuizSolvingTry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:34:24.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GetQuizSolvingTryResponseDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:33:40.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserAnswerResponseDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:32:17.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreateQuizSolvingTryResponseDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:31:37.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CreateQuizSolvingTryRequestDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:30:32.913Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserAnswerDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:28:23.836Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
