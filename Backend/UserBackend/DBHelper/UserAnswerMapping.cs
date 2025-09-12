@@ -19,7 +19,7 @@ namespace UserBackend.DBHelper
 
             builder.HasOne(u => u.QuizSolvingTry)
                    .WithMany(qa => qa.UserAnswers)
-                   .HasForeignKey(u => u.QuizAttemptId)
+                   .HasForeignKey(u => u.QuizSolvingTrytId)
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(u => u.Question)

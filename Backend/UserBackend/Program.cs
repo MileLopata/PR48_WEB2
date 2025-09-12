@@ -24,12 +24,26 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDbContext<QuizDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IQuizService, QuizService>();
+builder.Services.AddScoped<IQuizSolvingTryService, QuizSolvingTryService>();
+
+builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
+builder.Services.AddScoped<IQuizRepo, QuizRepo>();
+builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
+builder.Services.AddScoped<IQuizSolvingTryRepo, QuizSolvingTryRepo>();
 
 builder.Services.AddScoped<TokenProvider>();
 builder.Services.AddScoped<IUserAuthentificationService, UserAuthentificationService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<AppMappingProfile>();
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -47,8 +61,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             )
         };
     });
-
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

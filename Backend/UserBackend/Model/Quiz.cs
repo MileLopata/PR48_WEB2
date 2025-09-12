@@ -6,10 +6,10 @@ namespace UserBackend.Model
     {
         public int Id { get; set; }
         public int NumberOfQuestions { get; set; }
-        public required string QuizTitle { get; set; }
-        public string QuizDescription { get; set; } = string.Empty;
+        public required string Title { get; set; }
+        public string Description { get; set; } = string.Empty;
         public TimeSpan TimeLimit { get; set; }
-        public QuizLevelOfDifficulty Difficulty { get; set; }
+        public QuizLevelOfDifficulty LevelOfDifficulty { get; set; }
         public ICollection<Question> Questions { get; set; } = new List<Question>();
         public List<QuizSubjectLink> Subjects { get; set; } = new List<QuizSubjectLink>();
     }

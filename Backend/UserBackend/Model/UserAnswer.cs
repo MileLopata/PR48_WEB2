@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public int QuizAttemptId { get; set; }
+        public int QuizSolvingTrytId { get; set; }
         public QuizSolvingTry QuizSolvingTry { get; set; } = null!;
 
         public double Score { get; set; }

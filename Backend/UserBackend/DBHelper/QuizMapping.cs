@@ -8,7 +8,7 @@ namespace UserBackend.DBHelper
     {
         public void Configure(EntityTypeBuilder<Quiz> builder)
         {
-            builder.Property(e => e.Difficulty)
+            builder.Property(e => e.LevelOfDifficulty)
                 .HasConversion<string>();
 
             builder.HasMany(q => q.Subjects)

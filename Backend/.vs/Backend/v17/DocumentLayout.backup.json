@@ -3,40 +3,48 @@
   "WorkspaceRootPath": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizdto\\createquizrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizdto\\createquizrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\migrations\\quizdb\\20250912013322_initmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\migrations\\quizdb\\20250912013322_initmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\migrations\\userdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\migrations\\userdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizdto\\quizdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizdto\\quizdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\getquizleaderboarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\getquizleaderboarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\model\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\model\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\getquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\getquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\userbackend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\userbackend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\model\\quizsolvingtry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\model\\quizsolvingtry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dbhelper\\quizmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dbhelper\\quizmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\useranswerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\useranswerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dbhelper\\userdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dbhelper\\userdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\createquizsolvingtryrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dbhelper\\quizdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dbhelper\\quizdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\dto\\quizsolvingtrydto\\useranswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\dto\\quizsolvingtrydto\\useranswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\interfaces\\iquizsolvingtryrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\interfaces\\iquizsolvingtryrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|d:\\github\\pr48_2021\\pr48_web2\\backend\\userbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BA1CDC7A-B011-4BA9-A539-CB4598D09585}|UserBackend\\UserBackend.csproj|solutionrelative:userbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,118 +59,144 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CreateQuizRequestDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizDTO\\CreateQuizRequestDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Title": "20250912013322_InitMigration.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Migrations\\QuizDb\\20250912013322_InitMigration.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Migrations\\QuizDb\\20250912013322_InitMigration.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Migrations\\QuizDb\\20250912013322_InitMigration.cs",
+              "RelativeToolTip": "UserBackend\\Migrations\\QuizDb\\20250912013322_InitMigration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:40:14.012Z",
+              "WhenOpened": "2025-09-12T01:33:33.382Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "QuizDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA9AAAAAAAAAA==",
+              "Title": "UserDbContextModelSnapshot.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Migrations\\UserDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Migrations\\UserDbContextModelSnapshot.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Migrations\\UserDbContextModelSnapshot.cs",
+              "RelativeToolTip": "UserBackend\\Migrations\\UserDbContextModelSnapshot.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:38:28.497Z",
+              "WhenOpened": "2025-09-12T01:31:25.774Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GetQuizLeaderboardDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizLeaderboardDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Title": "QuizDTO.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "RelativeToolTip": "UserBackend\\DTO\\QuizDTO\\QuizDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:35:07.49Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "QuizSolvingTry.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\QuizSolvingTry.cs",
-              "RelativeDocumentMoniker": "UserBackend\\Model\\QuizSolvingTry.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\QuizSolvingTry.cs",
-              "RelativeToolTip": "UserBackend\\Model\\QuizSolvingTry.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:34:24.968Z",
+              "WhenOpened": "2025-09-12T01:29:48.615Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "GetQuizSolvingTryResponseDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\GetQuizSolvingTryResponseDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Title": "Quiz.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\Quiz.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Model\\Quiz.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Model\\Quiz.cs",
+              "RelativeToolTip": "UserBackend\\Model\\Quiz.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:33:40.878Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserAnswerResponseDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerResponseDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:32:17.421Z",
+              "WhenOpened": "2025-09-12T01:27:23.237Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "CreateQuizSolvingTryResponseDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryResponseDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Title": "QuizMapping.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DBHelper\\QuizMapping.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DBHelper\\QuizMapping.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DBHelper\\QuizMapping.cs",
+              "RelativeToolTip": "UserBackend\\DBHelper\\QuizMapping.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:31:37.673Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CreateQuizSolvingTryRequestDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\CreateQuizSolvingTryRequestDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:30:32.913Z",
+              "WhenOpened": "2025-09-12T01:27:02.221Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "UserAnswerDTO.cs",
-              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
-              "RelativeDocumentMoniker": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
-              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
-              "RelativeToolTip": "UserBackend\\DTO\\QuizSolvingTryDTO\\UserAnswerDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
+              "Title": "QuizDbContext.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DBHelper\\QuizDbContext.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DBHelper\\QuizDbContext.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DBHelper\\QuizDbContext.cs",
+              "RelativeToolTip": "UserBackend\\DBHelper\\QuizDbContext.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAwAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T19:28:23.836Z",
+              "WhenOpened": "2025-09-12T01:18:24.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserDbContext.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DBHelper\\UserDbContext.cs",
+              "RelativeDocumentMoniker": "UserBackend\\DBHelper\\UserDbContext.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\DBHelper\\UserDbContext.cs",
+              "RelativeToolTip": "UserBackend\\DBHelper\\UserDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T01:18:15.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IQuizSolvingTryRepo.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Interfaces\\IQuizSolvingTryRepo.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Interfaces\\IQuizSolvingTryRepo.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Interfaces\\IQuizSolvingTryRepo.cs",
+              "RelativeToolTip": "UserBackend\\Interfaces\\IQuizSolvingTryRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T00:30:58.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\appsettings.json",
+              "RelativeDocumentMoniker": "UserBackend\\appsettings.json",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\appsettings.json",
+              "RelativeToolTip": "UserBackend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-12T00:28:49.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserBackend.http",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.http",
+              "RelativeDocumentMoniker": "UserBackend\\UserBackend.http",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\UserBackend.http",
+              "RelativeToolTip": "UserBackend\\UserBackend.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-09-12T00:15:40.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Program.cs",
+              "RelativeDocumentMoniker": "UserBackend\\Program.cs",
+              "ToolTip": "D:\\GitHub\\pr48_2021\\PR48_WEB2\\Backend\\UserBackend\\Program.cs",
+              "RelativeToolTip": "UserBackend\\Program.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAAwHYAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T00:15:02.606Z",
               "EditorCaption": ""
             }
           ]
