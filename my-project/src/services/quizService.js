@@ -68,3 +68,34 @@ export async function deleteQuiz(id) {
     }
     return responseBody;
 }
+
+export async function getQuizById(id) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch quiz');
+    }
+    return response.json();
+}
+
+export async function getQuizQuestions(quizId) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`https://localhost:7042/api/Question/quiz/${quizId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error || 'Failed to fetch quiz questions');
+    }
+    
+    const data = await response.json();
+    console.log('Raw API response:', data); // DEBUG
+    return data;
+}

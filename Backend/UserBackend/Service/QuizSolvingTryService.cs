@@ -60,7 +60,8 @@ namespace UserBackend.Service
                     {
                         QuestionId = question.Id,
                         SelectedOptionIds = userAnswer.SelectedOptionIds,
-                        FillInTheBlankInput = userAnswer.FillInTheBlankInput
+                        FillInTheBlankInput = userAnswer.FillInTheBlankInput,
+                        Score = pointsAwarded
                     });
 
                     answerResponses.Add(new UserAnswerResponseDTO

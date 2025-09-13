@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { getAllQuizzes } from '../services/quizService';
 import { QuizLevelNames, QuizSubjectNames } from '../models/quiz';
 import '../styles/RegularUserStartPageStyle.css';
+import { useNavigate } from 'react-router-dom';
 
 function RegularUserStartPage() {
     const [quizzes, setQuizzes] = useState([]);
@@ -13,6 +14,8 @@ function RegularUserStartPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedSubject, setSelectedSubject] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
+
+    const navigate = useNavigate();
 
     const filterQuizzes = useCallback(() => {
         let filtered = [...quizzes];
@@ -70,9 +73,11 @@ function RegularUserStartPage() {
     };
 
     const handleStartQuiz = (quiz) => {
-        // TODO: Implement quiz start functionality
-        console.log('Starting quiz:', quiz);
-        alert(`Starting quiz: ${quiz.Title || quiz.title}`);
+        navigate(`/quiz/${quiz.Id || quiz.id}`, { 
+            state: { 
+                quizData: quiz 
+            } 
+        });
     };
 
     const getDifficultyClass = (difficulty) => {
@@ -108,8 +113,20 @@ function RegularUserStartPage() {
         <div className="user-bg">
             <div className="user-container">
                 <div className="user-header">
-                    <h1>Available Quizzes</h1>
-                    <p>Choose a quiz to test your knowledge!</p>
+                    <div className="header-content">
+                        <div className="header-text">
+                            <h1>Available Quizzes</h1>
+                            <p>Choose a quiz to test your knowledge!</p>
+                        </div>
+                        <div className="header-actions">
+                            <button 
+                                onClick={() => navigate('/my-results')} 
+                                className="my-results-btn"
+                            >
+                                📊 My Results
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 {error && <div className="error-message">{error}</div>}
