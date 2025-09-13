@@ -320,8 +320,8 @@ namespace UserBackend.Service
         {
             try
             {
-                Question? existingQuestion =  await _questionRepo.GetByIdAsync(id);
-                if(existingQuestion is null)
+                Question? existingQuestion = await _questionRepo.GetByIdAsync(id);
+                if (existingQuestion is null)
                 {
                     return new ResponseData<QuestionDTO>
                     {
@@ -329,10 +329,13 @@ namespace UserBackend.Service
                         Message = $"Question with id {id} not found."
                     };
                 }
+
                 existingQuestion.Type = request.Type;
                 existingQuestion.Text = request.Text;
+                existingQuestion.Points = request.Points; 
+
                 existingQuestion.AnswerOptions.Clear();
-                foreach(QuestionAnswerOptionDTO optionDTO in request.AnswerOptions)
+                foreach (QuestionAnswerOptionDTO optionDTO in request.AnswerOptions)
                 {
                     existingQuestion.AnswerOptions.Add(new QuestionAnswerOption
                     {
@@ -347,7 +350,8 @@ namespace UserBackend.Service
 
                 QuestionDTO questionDTO = _mapper.Map<QuestionDTO>(existingQuestion);
                 return new ResponseData<QuestionDTO>(questionDTO, ResponseStatus.OK, "Question updated successfully.");
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new ResponseData<QuestionDTO>
                 {
@@ -362,7 +366,7 @@ namespace UserBackend.Service
             try
             {
                 var quiz = await _quizRepo.GetByIdAsync(id);
-                if(quiz is null)
+                if (quiz is null)
                 {
                     return new ResponseData<QuizDTO>
                     {
@@ -371,7 +375,7 @@ namespace UserBackend.Service
                     };
                 }
 
-                if(string.IsNullOrWhiteSpace(request.Title))
+                if (string.IsNullOrWhiteSpace(request.Title))
                 {
                     return new ResponseData<QuizDTO>
                     {
@@ -379,25 +383,35 @@ namespace UserBackend.Service
                         Message = "Quiz title cannot be empty."
                     };
                 }
+
                 quiz.Title = request.Title;
                 quiz.Description = request.Description ?? string.Empty;
                 quiz.LevelOfDifficulty = request.LevelOfDifficulty;
                 quiz.TimeLimit = request.TimeLimit;
 
-                List<QuizSubject> newSubjects = request.Subjects;
-                List<QuizSubject> existingSubjects = quiz.Subjects.Select(s => s.Subject).ToList();
+                var newSubjects = request.Subjects ?? new List<QuizSubject>();
+                var existingSubjects = quiz.Subjects.Select(s => s.Subject).ToList();
 
-                var subjectsToAdd = newSubjects.Except(existingSubjects).ToList();
-                foreach(QuizSubject subject in subjectsToAdd)
+                var newSubjectsSet = new HashSet<QuizSubject>(newSubjects);
+                var existingSubjectsSet = new HashSet<QuizSubject>(existingSubjects);
+
+                bool subjectsChanged = !newSubjectsSet.SetEquals(existingSubjectsSet);
+
+                if (subjectsChanged)
                 {
-                    quiz.Subjects.Add(new QuizSubjectLink { QuizId = quiz.Id, Subject = subject });
+                    quiz.Subjects.Clear();
+                    foreach (QuizSubject subject in newSubjects)
+                    {
+                        quiz.Subjects.Add(new QuizSubjectLink { QuizId = quiz.Id, Subject = subject });
+                    }
                 }
 
                 Quiz? updatedQuiz = await _quizRepo.UpdateAsync(quiz);
                 QuizDTO quizDTO = _mapper.Map<QuizDTO>(updatedQuiz);
 
                 return new ResponseData<QuizDTO>(quizDTO, ResponseStatus.OK, "Quiz updated successfully.");
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new ResponseData<QuizDTO>
                 {

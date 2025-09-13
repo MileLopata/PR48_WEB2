@@ -1,0 +1,257 @@
+.admin-bg {
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #1976d2 0%, #0d47a1 60%, #ff9800 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-container {
+    background: rgba(20, 30, 60, 0.92);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(25, 118, 210, 0.25), 0 2px 8px rgba(255, 152, 0, 0.12);
+    padding: 48px 40px 36px 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    color: #ff9800;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
+.admin-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    letter-spacing: 2px;
+    color: #ff9800;
+    text-shadow: 0 2px 8px #1976d2;
+}
+
+.admin-container h2 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 18px;
+    color: #ff9800;
+}
+
+.admin-container form {
+    margin-bottom: 32px;
+}
+
+.admin-container input[type="text"],
+.admin-container textarea,
+.admin-container select {
+    width: 90%;
+    padding: 14px;
+    margin: 14px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    background: #263859;
+    color: #ff9800;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.admin-container input[type="text"]:focus,
+.admin-container textarea:focus,
+.admin-container select:focus {
+    background: #1976d2;
+    color: #fff;
+}
+
+.admin-btn {
+    width: 80%;
+    padding: 16px 0;
+    margin: 28px auto 0 auto;
+    background: linear-gradient(90deg, #ff9800 0%, #1976d2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-btn:hover {
+    background: linear-gradient(90deg, #1976d2 0%, #ff9800 100%);
+    transform: scale(1.07);
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.25);
+}
+
+.admin-container .error-message {
+    color: #ff3c00;
+    background: rgba(255, 152, 0, 0.08);
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.admin-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-container li {
+    background: #263859;
+    color: #ff9800;
+    margin: 10px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+    text-align: left;
+}
+.admin-btn {
+    width: 80%;
+    padding: 16px 0;
+    margin: 28px auto 0 auto;
+    background: linear-gradient(90deg, #ff9800 0%, #1976d2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-btn:hover {
+    background: linear-gradient(90deg, #1976d2 0%, #ff9800 100%);
+    transform: scale(1.07);
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.25);
+}
+.edit-btn {
+    background: linear-gradient(90deg, #1976d2 0%, #ff9800 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 8px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.edit-btn:hover {
+    background: linear-gradient(90deg, #ff9800 0%, #1976d2 100%);
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    background: #ff3c00;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.cancel-btn:hover {
+    background: #d32f2f;
+    transform: scale(1.05);
+}
+
+/* Make the admin container wider and use flex for quiz list and edit form */
+.admin-container {
+    max-width: 1100px;
+    width: 95vw;
+    display: flex;
+    gap: 32px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.quiz-list {
+    flex: 2;
+}
+
+.edit-form-container {
+    flex: 1;
+    min-width: 350px;
+    max-width: 400px;
+}
+
+/* Edit form input and textarea background for visibility */
+.edit-form-container input[type="text"],
+.edit-form-container textarea,
+.edit-form-container select {
+    background: #31456a;
+    color: #ff9800;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.edit-form-container input[type="text"]:focus,
+.edit-form-container textarea:focus,
+.edit-form-container select:focus {
+    background: #1976d2;
+    color: #fff;
+}
+.delete-btn {
+    background: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.delete-btn:hover {
+    background: #ff3c00;
+    transform: scale(1.05);
+}
+.questions-btn {
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.questions-btn:hover {
+    background: #1976d2;
+    transform: scale(1.05);
+}
+.view-questions-btn {
+    background: #9c27b0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.view-questions-btn:hover {
+    background: #7b1fa2;
+    transform: scale(1.05);
+}

@@ -18,7 +18,7 @@ namespace UserBackend.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> CreateQuiz([FromBody] CreateQuizRequestDTO request)
         {
             var result = await _quizService.CreateQuizAsync(request);
@@ -46,7 +46,7 @@ namespace UserBackend.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> UpdateQuiz(int id, [FromBody] UpdateQuizRequestDTO request)
         {
             var result = await _quizService.UpdateQuizAsync(id, request);
@@ -68,7 +68,7 @@ namespace UserBackend.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> DeleteQuiz(int id)
         {
             var result = await _quizService.DeleteQuizAsync(id);
@@ -94,7 +94,7 @@ namespace UserBackend.Controllers
         }
 
         [HttpPost("{quizId:int}/questions")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> CreateQuestion(int quizId, [FromBody] CreateQuestionRequestDTO requestDto)
         {
             var dto = new CreateQuestionDTO
@@ -133,7 +133,7 @@ namespace UserBackend.Controllers
         }
 
         [HttpPut("{quizId}/questions/{questionId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> UpdateQuestion(int quizId, int questionId, [FromBody] UpdateQuestionRequestDTO request)
         {
             if (quizId <= 0)
@@ -158,7 +158,7 @@ namespace UserBackend.Controllers
         }
 
         [HttpDelete("{quizId}/questions/{questionId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> DeleteQuestion(int quizId, int questionId)
         {
             var result = await _quizService.DeleteQuestionAsync(questionId);
