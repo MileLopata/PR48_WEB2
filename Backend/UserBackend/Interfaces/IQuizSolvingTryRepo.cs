@@ -7,5 +7,6 @@ namespace UserBackend.Interfaces
         Task<IEnumerable<QuizSolvingTry>> GetSolvingTriesByUserIdAndQuizIdAsync(int userId, int quizId);
         Task<IEnumerable<QuizSolvingTry>> GetAllSolvingTriesByUserIdAsync(int userId);
         Task<IEnumerable<QuizSolvingTry>> GetAllSolvingTriesByQuizIdAsync(int quizId);
+        Task<IEnumerable<QuizSolvingTry>> GetAllSolvingTriesAsync();
     }
 }

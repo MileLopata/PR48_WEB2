@@ -129,6 +129,7 @@ namespace UserBackend.Service
             }
         }
 
+
         public async Task<ResponseData<List<GetQuizLeaderboardDTO>>> GetLeaderboardByQuiz(int quizId)
         {
             Quiz? quiz = await _quizRepo.GetByIdAsync(quizId);
@@ -331,6 +332,66 @@ namespace UserBackend.Service
             }
             return pointsAwarded;
         }
-        
+        // ...existing code...
+
+        public async Task<ResponseData<List<GetQuizSolvingTryResponseDTO>>> GetAllQuizResults()
+        {
+            try
+            {
+                IEnumerable<QuizSolvingTry> allSolvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesAsync();
+
+                var resultsList = new List<GetQuizSolvingTryResponseDTO>();
+
+                foreach (var st in allSolvingTries)
+                {
+                    // Fetch user and quiz data separately
+                    User? user = await _userRepo.GetByIdAsync(st.UserId);
+                    Quiz? quiz = await _quizRepo.GetByIdAsync(st.QuizId);
+
+                    // Calculate max possible score for the quiz
+                    double maxScore = quiz?.Questions?.Sum(q => q.Points) ?? 0;
+
+                    resultsList.Add(new GetQuizSolvingTryResponseDTO
+                    {
+                        Id = st.Id,
+                        QuizId = st.QuizId,
+                        UserId = st.UserId,
+                        Score = st.Score,
+                        MaxScore = maxScore,
+                        Duration = st.Duration,
+                        AttemptedAt = st.AttemptedAt,
+                        UserName = user?.Username ?? $"User {st.UserId}",
+                        QuizTitle = quiz?.Title ?? "Unknown Quiz",
+                        UserAnswers = st.UserAnswers.Select(ua => new UserAnswerResponseDTO
+                        {
+                            QuestionId = ua.QuestionId,
+                            Score = ua.Score,
+                            SelectedOptionIds = ua.SelectedOptionIds,
+                            FillInTheBlankInput = ua.FillInTheBlankInput
+                        }).ToList()
+                    });
+                }
+
+                return new ResponseData<List<GetQuizSolvingTryResponseDTO>>
+                {
+                    Status = ResponseStatus.OK,
+                    Message = "All quiz results retrieved successfully",
+                    Data = resultsList.OrderByDescending(r => r.AttemptedAt).ToList()
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseData<List<GetQuizSolvingTryResponseDTO>>
+                {
+                    Status = ResponseStatus.INTERNAL_SERVER_ERROR,
+                    Message = $"An error occurred when retrieving all quiz results: {ex.Message}",
+                    Data = new List<GetQuizSolvingTryResponseDTO>()
+                };
+            }
+        }
+
+        // ...existing code...
+
+
     }
 }

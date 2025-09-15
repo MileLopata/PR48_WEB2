@@ -93,5 +93,17 @@ namespace UserBackend.Controllers
                 _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
             };
         }
+        [HttpGet("admin/all-results")]
+        [Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> GetAllQuizResults()
+        {
+            ResponseData<List<GetQuizSolvingTryResponseDTO>> result = await _quizSolvingTryService.GetAllQuizResults();
+
+            return result.Status switch
+            {
+                ResponseStatus.OK => Ok(result.Data),
+                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
+            };
+        }
     }
 }

@@ -6,6 +6,9 @@
         public int QuizId { get; set; }
         public int UserId { get; set; }
         public double Score { get; set; }
+        public double MaxScore { get; set; }
+        public string UserName { get; set; } = string.Empty;
+        public string QuizTitle { get; set; } = string.Empty;
         public TimeSpan Duration { get; set; }
         public DateTime AttemptedAt { get; set; }
         public List<UserAnswerResponseDTO> UserAnswers { get; set; } = new();

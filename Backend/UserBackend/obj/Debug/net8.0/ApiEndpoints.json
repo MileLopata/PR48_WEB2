@@ -280,6 +280,16 @@
   },
   {
     "ContainingType": "UserBackend.Controllers.QuizSolvingTryController",
+    "Method": "GetAllQuizResults",
+    "RelativePath": "api/QuizSolvingTry/admin/all-results",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserBackend.Controllers.QuizSolvingTryController",
     "Method": "GetAllForOneQuiz",
     "RelativePath": "api/QuizSolvingTry/leaderboard/{quizId}",
     "HttpMethod": "GET",

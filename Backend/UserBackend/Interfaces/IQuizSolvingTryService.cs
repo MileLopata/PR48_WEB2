@@ -11,5 +11,6 @@ namespace UserBackend.Interfaces
         Task<ResponseData<List<GetQuizSolvingTryResponseDTO>>> GetSolvingTriesByQuiz(int quizId);
         Task<ResponseData<List<GetQuizSolvingTryResponseDTO>>> GetSolvingTriesByUser(int userId);
         Task<ResponseData<List<GetQuizLeaderboardDTO>>> GetLeaderboardByQuiz(int quizId);
+        Task<ResponseData<List<GetQuizSolvingTryResponseDTO>>> GetAllQuizResults();
     }
 }

@@ -67,3 +67,21 @@ export async function getQuizLeaderboard(quizId) {
     
     return response.json();
 }
+
+export async function getAllQuizResults() {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`https://localhost:7042/api/QuizSolvingTry/admin/all-results`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error || 'Failed to fetch all quiz results');
+    }
+    
+    return response.json();
+}

@@ -39,5 +39,16 @@ namespace UserBackend.Repository
                 .Include(a => a.UserAnswers)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<QuizSolvingTry>> GetAllSolvingTriesAsync()
+        {
+            return await _context.QuizSolvingTries
+                .Include(a => a.UserAnswers)
+                .Include(a => a.Quiz)  
+                .ThenInclude(q => q.Questions)  
+                .OrderByDescending(a => a.AttemptedAt)
+                .ToListAsync();
+        }
+
+
     }
 }

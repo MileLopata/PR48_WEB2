@@ -503,6 +503,18 @@
         }
       }
     },
+    "/api/QuizSolvingTry/admin/all-results": {
+      "get": {
+        "tags": [
+          "QuizSolvingTry"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/{id}": {
       "get": {
         "tags": [
