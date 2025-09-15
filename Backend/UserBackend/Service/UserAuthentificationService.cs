@@ -5,8 +5,6 @@ using UserBackend.Model;
 using UserBackend.Response;
 using UserBackend.UserToken;
 
-
-
 namespace UserBackend.Service
 {
     public class UserAuthentificationService : IUserAuthentificationService
@@ -20,22 +18,21 @@ namespace UserBackend.Service
             _tokenProvider = tokenProvider;
         }
 
-
         public async Task<ResponseData<string>> Register(UserRegistrationDTO request)
         {
             try
             {
-                if (await _userRepo.EmailExistsAsync(request.Email) ||
-                    await _userRepo.UsernameExistsAsync(request.Username))
-                {
+                bool emailExists = await _userRepo.EmailExistsAsync(request.Email);
+                bool usernameExists = await _userRepo.UsernameExistsAsync(request.Username);
+
+                if (emailExists || usernameExists)
                     return new ResponseData<string>
                     {
                         Status = ResponseStatus.BAD_REQUEST,
                         Message = "The email or username is already in use"
                     };
-                }
 
-                User user = new User
+                var user = new User
                 {
                     Username = request.Username,
                     Email = request.Email,
@@ -50,8 +47,7 @@ namespace UserBackend.Service
                 }
 
                 await _userRepo.AddAsync(user);
-
-                string token = _tokenProvider.Create(user);
+                var token = _tokenProvider.Create(user);
 
                 return new ResponseData<string>
                 {
@@ -69,34 +65,31 @@ namespace UserBackend.Service
                 };
             }
         }
+
         public async Task<ResponseData<string>> Login(UserLoginDTO request)
         {
             try
             {
-                User? existingUser = await _userRepo.GetByEmailOrUsernameAsync(request.EmailOrUsername);
+                var existingUser = await _userRepo.GetByEmailOrUsernameAsync(request.EmailOrUsername);
 
-                if (existingUser is null)
-                {
+                if (existingUser == null)
                     return new ResponseData<string>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "User not found"
                     };
-                }
 
-                var verificationResult = new PasswordHasher<User>()
-                    .VerifyHashedPassword(existingUser, existingUser.PasswordHash, request.Password);
+                var hasher = new PasswordHasher<User>();
+                var verificationResult = hasher.VerifyHashedPassword(existingUser, existingUser.PasswordHash, request.Password);
 
                 if (verificationResult == PasswordVerificationResult.Failed)
-                {
                     return new ResponseData<string>
                     {
                         Status = ResponseStatus.UNAUTHORIZED,
                         Message = "Invalid password"
                     };
-                }
 
-                string token = _tokenProvider.Create(existingUser);
+                var token = _tokenProvider.Create(existingUser);
 
                 return new ResponseData<string>
                 {

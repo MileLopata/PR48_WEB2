@@ -14,10 +14,11 @@ namespace UserBackend.Service
         {
             _userRepo = userRepo;
         }
+
         public async Task<ResponseData<byte[]?>> GetProfilePicture(int id)
         {
-            User? user = await _userRepo.GetByIdAsync(id);
-            if (user is null)
+            var user = await _userRepo.GetByIdAsync(id);
+            if (user == null)
                 return new ResponseData<byte[]?>
                 {
                     Status = ResponseStatus.NOT_FOUND,
@@ -36,21 +37,15 @@ namespace UserBackend.Service
         {
             try
             {
-                User? user = await _userRepo.GetByIdAsync(id);
-
+                var user = await _userRepo.GetByIdAsync(id);
                 if (user == null)
-                {
                     return new ResponseData<UserResponseDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "User not found"
                     };
-                }
 
-                UserResponseDTO response = new UserResponseDTO(
-                    user.Username,
-                    user.Email
-                );
+                var response = new UserResponseDTO(user.Username, user.Email);
 
                 return new ResponseData<UserResponseDTO>
                 {

@@ -22,20 +22,20 @@ namespace UserBackend.Service
             _userRepo = userRepo;
             _mapper = mapper;
         }
+
         public async Task<ResponseData<CreateQuizSolvingTryResponseDTO>> CreateQuizSolvingTryAsync(int userId, CreateQuizSolvingTryRequestDTO request)
         {
             try
             {
-                Quiz? quiz = await _quizRepo.GetByIdAsync(request.QuizId);
-                if (quiz is null)
-                {
+                var quiz = await _quizRepo.GetByIdAsync(request.QuizId);
+                if (quiz == null)
                     return new ResponseData<CreateQuizSolvingTryResponseDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "Quiz not found"
                     };
-                }
-                QuizSolvingTry solvingTry = new QuizSolvingTry
+
+                var solvingTry = new QuizSolvingTry
                 {
                     UserId = userId,
                     QuizId = quiz.Id,
@@ -44,15 +44,14 @@ namespace UserBackend.Service
                 };
 
                 double totalScore = 0;
-                List<UserAnswerResponseDTO> answerResponses = new();
+                var answerResponses = new List<UserAnswerResponseDTO>();
 
-                foreach (UserAnswerDTO userAnswer in request.Answers)
+                foreach (var userAnswer in request.Answers)
                 {
-                    Question? question = quiz.Questions.FirstOrDefault(q => q.Id == userAnswer.QuestionId);
-                    if (question is null)
-                    {
+                    var question = quiz.Questions.FirstOrDefault(q => q.Id == userAnswer.QuestionId);
+                    if (question == null)
                         continue;
-                    }
+
                     double pointsAwarded = CalculatePoints(question, userAnswer);
                     totalScore += pointsAwarded;
 
@@ -75,7 +74,7 @@ namespace UserBackend.Service
                 solvingTry.Score = totalScore;
 
                 await _quizSolvingTryRepo.AddAsync(solvingTry);
-                CreateQuizSolvingTryResponseDTO response = _mapper.Map<CreateQuizSolvingTryResponseDTO>(solvingTry);
+                var response = _mapper.Map<CreateQuizSolvingTryResponseDTO>(solvingTry);
 
                 return new ResponseData<CreateQuizSolvingTryResponseDTO>
                 {
@@ -89,7 +88,7 @@ namespace UserBackend.Service
                 return new ResponseData<CreateQuizSolvingTryResponseDTO>
                 {
                     Status = ResponseStatus.INTERNAL_SERVER_ERROR,
-                    Message = $"An error occurred when solving a quiz"
+                    Message = $"An error occurred when solving a quiz" + ex.ToString()
                 };
             }
         }
@@ -98,15 +97,14 @@ namespace UserBackend.Service
         {
             try
             {
-                QuizSolvingTry? solvingTry = await _quizSolvingTryRepo.GetByIdAsync(id);
-                if(solvingTry is null)
-                {
+                var solvingTry = await _quizSolvingTryRepo.GetByIdAsync(id);
+                if (solvingTry == null)
                     return new ResponseData<bool>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "Quiz solving try not found",
                     };
-                }
+
                 await _quizSolvingTryRepo.DeleteAsync(id);
                 await _quizSolvingTryRepo.SaveChangesAsync();
 
@@ -116,7 +114,6 @@ namespace UserBackend.Service
                     Message = "Quiz solving try deleted successfully",
                     Data = true
                 };
-
             }
             catch (Exception ex)
             {
@@ -129,22 +126,18 @@ namespace UserBackend.Service
             }
         }
 
-
         public async Task<ResponseData<List<GetQuizLeaderboardDTO>>> GetLeaderboardByQuiz(int quizId)
         {
-            Quiz? quiz = await _quizRepo.GetByIdAsync(quizId);
-            if(quiz is null)
-            {
+            var quiz = await _quizRepo.GetByIdAsync(quizId);
+            if (quiz == null)
                 return new ResponseData<List<GetQuizLeaderboardDTO>>
                 {
                     Status = ResponseStatus.NOT_FOUND,
                     Message = "Quiz not found"
                 };
-            }
 
-            IEnumerable<QuizSolvingTry> solvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesByQuizIdAsync(quizId);
-
-            List<QuizSolvingTry> orderedSolvingTries = solvingTries
+            var solvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesByQuizIdAsync(quizId);
+            var orderedSolvingTries = solvingTries
                 .OrderByDescending(st => st.Score)
                 .ThenBy(st => st.Duration)
                 .ThenBy(st => st.AttemptedAt)
@@ -156,7 +149,7 @@ namespace UserBackend.Service
             double? lastScore = null;
             TimeSpan? lastDuration = null;
 
-            foreach(var solvingTry in orderedSolvingTries)
+            foreach (var solvingTry in orderedSolvingTries)
             {
                 if (lastScore != solvingTry.Score || lastDuration != solvingTry.Duration)
                 {
@@ -167,8 +160,8 @@ namespace UserBackend.Service
                 {
                     rankOffset++;
                 }
-                User? user = await _userRepo.GetByIdAsync(solvingTry.UserId);
-                string userName = user?.Username ?? $"User {solvingTry.UserId}";
+                var user = await _userRepo.GetByIdAsync(solvingTry.UserId);
+                var userName = user?.Username ?? $"User {solvingTry.UserId}";
 
                 leaderboard.Add(new GetQuizLeaderboardDTO
                 {
@@ -181,7 +174,7 @@ namespace UserBackend.Service
                 });
                 lastScore = solvingTry.Score;
                 lastDuration = solvingTry.Duration;
-                rankOffset++;   
+                rankOffset++;
             }
 
             return new ResponseData<List<GetQuizLeaderboardDTO>>
@@ -196,17 +189,15 @@ namespace UserBackend.Service
         {
             try
             {
-                QuizSolvingTry? solvingTry = await _quizSolvingTryRepo.GetByIdAsync(id);
-                if (solvingTry is null)
-                {
+                var solvingTry = await _quizSolvingTryRepo.GetByIdAsync(id);
+                if (solvingTry == null)
                     return new ResponseData<GetQuizSolvingTryResponseDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "Quiz solving try not found"
                     };
-                }
 
-                GetQuizSolvingTryResponseDTO response = _mapper.Map<GetQuizSolvingTryResponseDTO>(solvingTry);
+                var response = _mapper.Map<GetQuizSolvingTryResponseDTO>(solvingTry);
 
                 return new ResponseData<GetQuizSolvingTryResponseDTO>
                 {
@@ -220,27 +211,24 @@ namespace UserBackend.Service
                 return new ResponseData<GetQuizSolvingTryResponseDTO>
                 {
                     Status = ResponseStatus.INTERNAL_SERVER_ERROR,
-                    Message = $"An error occurred when retrieving a quiz solving try {ex.Message}" 
+                    Message = $"An error occurred when retrieving a quiz solving try {ex.Message}"
                 };
             }
         }
 
         public async Task<ResponseData<List<GetQuizSolvingTryResponseDTO>>> GetSolvingTriesByQuiz(int quizId)
         {
-            Quiz? quiz = await _quizRepo.GetByIdAsync(quizId);
-            if(quiz is null)
-            {
+            var quiz = await _quizRepo.GetByIdAsync(quizId);
+            if (quiz == null)
                 return new ResponseData<List<GetQuizSolvingTryResponseDTO>>
                 {
                     Status = ResponseStatus.NOT_FOUND,
                     Message = "Quiz not found"
                 };
-            }
 
-            IEnumerable<QuizSolvingTry> solvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesByQuizIdAsync(quizId);
+            var solvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesByQuizIdAsync(quizId);
+            var response = _mapper.Map<List<GetQuizSolvingTryResponseDTO>>(solvingTries);
 
-            List<GetQuizSolvingTryResponseDTO> response = _mapper.Map<List<GetQuizSolvingTryResponseDTO>>(solvingTries);
-            
             return new ResponseData<List<GetQuizSolvingTryResponseDTO>>
             {
                 Status = ResponseStatus.OK,
@@ -253,7 +241,7 @@ namespace UserBackend.Service
         {
             try
             {
-                IEnumerable<QuizSolvingTry> solvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesByUserIdAsync(userId);
+                var solvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesByUserIdAsync(userId);
 
                 var solvingTriesList = solvingTries.Select(st => new GetQuizSolvingTryResponseDTO
                 {
@@ -289,66 +277,54 @@ namespace UserBackend.Service
                 };
             }
         }
+
         private double CalculatePoints(Question question, UserAnswerDTO userAnswer)
         {
             double pointsAwarded = 0;
 
-            switch (question.Type)
+            if (question.Type == QuestionType.MULTIPLE_CHOICE_ONE_CORRECT ||
+                question.Type == QuestionType.MULTIPLE_CHOICE_MULTIPLE_CORRECT ||
+                question.Type == QuestionType.TRUE_FALSE)
             {
-                case QuestionType.MULTIPLE_CHOICE_ONE_CORRECT:
-                case QuestionType.MULTIPLE_CHOICE_MULTIPLE_CORRECT:
-                case QuestionType.TRUE_FALSE:
-                    {
-                        int[] correctOptions = question.AnswerOptions
-                            .Where(o => o.IsCorrect == true)
-                            .Select(o => o.Id)
-                            .OrderBy(id => id)
-                            .ToArray();
+                var correctOptions = question.AnswerOptions
+                    .Where(o => o.IsCorrect == true)
+                    .Select(o => o.Id)
+                    .OrderBy(id => id)
+                    .ToArray();
 
-                        int[]? selectedOptions = userAnswer.SelectedOptionIds?
-                            .OrderBy(id => id)
-                            .ToArray();
-                        if (selectedOptions is null || selectedOptions.Length == 0)
-                        {
-                            break;
-                        }
-                        if (correctOptions.SequenceEqual(selectedOptions))
-                        {
-                            pointsAwarded = question.Points;
-                        }
-                        break;
-                    }
-                case QuestionType.FILL_IN_THE_BLANK:
-                    {
-                        string? correct = question.AnswerOptions.FirstOrDefault()?.FillInTheBlankCorrectAnswer; // TODO, CHANGE MODEL TO USE AnswerOptions[0].Text instead of FillInTheBlankCorrectAnswer
-                        if (!string.IsNullOrEmpty(correct) &&
-                            string.Equals(userAnswer.FillInTheBlankInput, correct, StringComparison.OrdinalIgnoreCase))
-                        {
-                            pointsAwarded = question.Points;
-                        }
+                var selectedOptions = userAnswer.SelectedOptionIds?
+                    .OrderBy(id => id)
+                    .ToArray();
 
-                        break;
-                    }
+                if (selectedOptions != null && selectedOptions.Length > 0 &&
+                    correctOptions.SequenceEqual(selectedOptions))
+                {
+                    pointsAwarded = question.Points;
+                }
+            }
+            else if (question.Type == QuestionType.FILL_IN_THE_BLANK)
+            {
+                var correct = question.AnswerOptions.FirstOrDefault()?.FillInTheBlankCorrectAnswer;
+                if (!string.IsNullOrEmpty(correct) &&
+                    string.Equals(userAnswer.FillInTheBlankInput, correct, StringComparison.OrdinalIgnoreCase))
+                {
+                    pointsAwarded = question.Points;
+                }
             }
             return pointsAwarded;
         }
-        // ...existing code...
 
         public async Task<ResponseData<List<GetQuizSolvingTryResponseDTO>>> GetAllQuizResults()
         {
             try
             {
-                IEnumerable<QuizSolvingTry> allSolvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesAsync();
-
+                var allSolvingTries = await _quizSolvingTryRepo.GetAllSolvingTriesAsync();
                 var resultsList = new List<GetQuizSolvingTryResponseDTO>();
 
                 foreach (var st in allSolvingTries)
                 {
-                    // Fetch user and quiz data separately
-                    User? user = await _userRepo.GetByIdAsync(st.UserId);
-                    Quiz? quiz = await _quizRepo.GetByIdAsync(st.QuizId);
-
-                    // Calculate max possible score for the quiz
+                    var user = await _userRepo.GetByIdAsync(st.UserId);
+                    var quiz = await _quizRepo.GetByIdAsync(st.QuizId);
                     double maxScore = quiz?.Questions?.Sum(q => q.Points) ?? 0;
 
                     resultsList.Add(new GetQuizSolvingTryResponseDTO
@@ -389,9 +365,5 @@ namespace UserBackend.Service
                 };
             }
         }
-
-        // ...existing code...
-
-
     }
 }

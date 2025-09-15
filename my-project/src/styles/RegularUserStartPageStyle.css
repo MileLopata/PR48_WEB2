@@ -28,12 +28,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .header-text {
     flex: 1;
+    text-align: center;
 }
 
 .header-text h1 {
@@ -50,7 +52,7 @@
 
 .header-actions {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     align-items: center;
     flex-shrink: 0;
     flex-wrap: nowrap;
@@ -87,7 +89,7 @@
 .logout-btn {
     position: fixed;
     top: 50px;
-    left: 20px;
+    left: 65px;
     background: linear-gradient(45deg, #f44336, #d32f2f);
     color: white;
     border: none;
@@ -533,5 +535,123 @@
         width: 100%;
         max-width: 250px;
         min-width: auto;
+    }
+}
+
+/* Add these styles to src/styles/RegularUserStartPageStyle.css */
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Increased gap */
+    margin: 55px auto 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 16px 20px; /* Increased padding */
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-picture {
+    width: 70px; /* Increased from 50px */
+    height: 70px; /* Increased from 50px */
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px; /* Increased from 20px */
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Slightly increased gap */
+}
+
+.username {
+    color: white;
+    font-size: 18px; /* Increased from 16px */
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .user-profile {
+        align-self: flex-start;
+        margin-bottom: 1rem;
+        padding: 14px 18px; /* Slightly smaller on tablet */
+        gap: 14px;
+    }
+    
+    .profile-picture {
+        width: 60px; /* Slightly smaller on tablet */
+        height: 60px;
+    }
+    
+    .profile-placeholder {
+        font-size: 24px;
+    }
+    
+    .username {
+        font-size: 17px;
+    }
+    
+    .header-actions {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile {
+        padding: 12px 16px; /* Smaller on mobile */
+        gap: 12px;
+    }
+    
+    .profile-picture {
+        width: 50px; /* Back to original size on mobile to save space */
+        height: 50px;
+    }
+    
+    .profile-placeholder {
+        font-size: 20px;
+    }
+    
+    .username {
+        font-size: 16px;
     }
 }

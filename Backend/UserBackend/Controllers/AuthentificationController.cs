@@ -14,24 +14,41 @@ namespace UserBackend.Controllers
         {
             var response = await userAuthentificationService.Register(request);
 
-            return response.Status switch
+            if (response.Status == ResponseStatus.CREATED)
             {
-                ResponseStatus.CREATED => Ok(new { token = response.Data, message = response.Message }),
-                ResponseStatus.BAD_REQUEST => BadRequest(new { error = response.Message }),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, new { error = response.Message })
-            };
+                return Ok(new { token = response.Data, message = response.Message });
+            }
+            else if (response.Status == ResponseStatus.BAD_REQUEST)
+            {
+                return BadRequest(new { error = response.Message });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = response.Message });
+            }
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDTO request)
         {
             var response = await userAuthentificationService.Login(request);
-            return response.Status switch
+
+            if (response.Status == ResponseStatus.OK)
             {
-                ResponseStatus.OK => Ok(new { token = response.Data, message = response.Message }),
-                ResponseStatus.BAD_REQUEST => BadRequest(new { error = response.Message }),
-                ResponseStatus.NOT_FOUND => NotFound(new { error = response.Message }),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, new { error = response.Message })
-            };
+                return Ok(new { token = response.Data, message = response.Message });
+            }
+            else if (response.Status == ResponseStatus.BAD_REQUEST)
+            {
+                return BadRequest(new { error = response.Message });
+            }
+            else if (response.Status == ResponseStatus.NOT_FOUND)
+            {
+                return NotFound(new { error = response.Message });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = response.Message });
+            }
         }
     }
 }

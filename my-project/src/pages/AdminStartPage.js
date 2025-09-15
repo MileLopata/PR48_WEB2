@@ -108,11 +108,22 @@ function AdminStartPage() {
             let answerOptions = [];
             
             if (questionForm.type === 'TRUE_FALSE') {
-                answerOptions = questionForm.answerOptions.map(option => ({
-                    Text: option.text,
-                    IsCorrect: option.isCorrect,
-                    FillInTheBlankCorrectAnswer: null
-                }));
+                // Ensure we always have True and False options with proper text
+                const trueOption = questionForm.answerOptions.find(opt => opt.text === 'True') || { text: 'True', isCorrect: false };
+                const falseOption = questionForm.answerOptions.find(opt => opt.text === 'False') || { text: 'False', isCorrect: false };
+                
+                answerOptions = [
+                    {
+                        Text: 'True',
+                        IsCorrect: trueOption.isCorrect,
+                        FillInTheBlankCorrectAnswer: null
+                    },
+                    {
+                        Text: 'False', 
+                        IsCorrect: falseOption.isCorrect,
+                        FillInTheBlankCorrectAnswer: null
+                    }
+                ];
             } else if (questionForm.type === 'FILL_IN_THE_BLANK') {
                 answerOptions = [{
                     Text: '',
@@ -278,12 +289,26 @@ function AdminStartPage() {
     };
 
     const updateEditAnswerOption = (index, field, value) => {
-        setEditQuestionForm(prev => ({
-            ...prev,
-            answerOptions: prev.answerOptions.map((option, i) => 
-                i === index ? { ...option, [field]: value } : option
-            )
-        }));
+        setEditQuestionForm(prev => {
+            if (field === 'isCorrect' && prev.type === 'MULTIPLE_CHOICE_ONE_CORRECT' && value === true) {
+                // For single correct answer, uncheck all others when one is checked
+                return {
+                    ...prev,
+                    answerOptions: prev.answerOptions.map((option, i) => ({
+                        ...option,
+                        isCorrect: i === index ? true : false
+                    }))
+                };
+            } else {
+                // For other fields or multiple correct answers
+                return {
+                    ...prev,
+                    answerOptions: prev.answerOptions.map((option, i) => 
+                        i === index ? { ...option, [field]: value } : option
+                    )
+                };
+            }
+        });
     };
 
     const addEditAnswerOption = () => {
@@ -631,7 +656,27 @@ const handleViewAllResults = () => {
                     
                     <select
                         value={questionForm.type}
-                        onChange={e => setQuestionForm(prev => ({ ...prev, type: e.target.value }))}
+                        onChange={e => {
+                            const newType = e.target.value;
+                            let newAnswerOptions = [];
+                            
+                            if (newType === 'TRUE_FALSE') {
+                                newAnswerOptions = [
+                                    { text: 'True', isCorrect: true, fillInTheBlankCorrectAnswer: null },
+                                    { text: 'False', isCorrect: false, fillInTheBlankCorrectAnswer: null }
+                                ];
+                            } else if (newType === 'FILL_IN_THE_BLANK') {
+                                newAnswerOptions = [{ text: '', isCorrect: null, fillInTheBlankCorrectAnswer: '' }];
+                            } else {
+                                newAnswerOptions = [{ text: '', isCorrect: false, fillInTheBlankCorrectAnswer: null }];
+                            }
+                            
+                            setQuestionForm(prev => ({ 
+                                ...prev, 
+                                type: newType,
+                                answerOptions: newAnswerOptions
+                            }));
+                        }}
                         required
                         style={{ width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '4px', border: 'none' }}
                     >
@@ -652,7 +697,7 @@ const handleViewAllResults = () => {
                                     <input
                                         type="radio"
                                         name="trueFalseAnswer"
-                                        checked={questionForm.answerOptions[0]?.isCorrect === true}
+                                        checked={questionForm.answerOptions.some(opt => opt.text === 'True' && opt.isCorrect)}
                                         onChange={() => setQuestionForm(prev => ({
                                             ...prev,
                                             answerOptions: [
@@ -668,7 +713,7 @@ const handleViewAllResults = () => {
                                     <input
                                         type="radio"
                                         name="trueFalseAnswer"
-                                        checked={questionForm.answerOptions[0]?.isCorrect === false || questionForm.answerOptions[1]?.isCorrect === true}
+                                        checked={questionForm.answerOptions.some(opt => opt.text === 'False' && opt.isCorrect)}
                                         onChange={() => setQuestionForm(prev => ({
                                             ...prev,
                                             answerOptions: [
@@ -934,13 +979,52 @@ const handleViewAllResults = () => {
                             style={{ width: '100%', padding: '8px', borderRadius: '4px', border: 'none' }}
                         />
                     </div>
-                ) : (
+                ) : editQuestionForm.type === 'MULTIPLE_CHOICE_ONE_CORRECT' ? (
+                    // Single correct answer - use radio buttons with same name
                     <div>
                         {editQuestionForm.answerOptions.map((option, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                 <input
-                                    type={editQuestionForm.type === 'MULTIPLE_CHOICE_ONE_CORRECT' ? 'radio' : 'checkbox'}
-                                    name="editCorrectAnswer"
+                                    type="radio"
+                                    name="editCorrectAnswerRadio" // Same name for all radio buttons
+                                    checked={option.isCorrect}
+                                    onChange={e => updateEditAnswerOption(index, 'isCorrect', e.target.checked)}
+                                    style={{ marginRight: '8px' }}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder={`Option ${index + 1}`}
+                                    value={option.text}
+                                    onChange={e => updateEditAnswerOption(index, 'text', e.target.value)}
+                                    required
+                                    style={{ flex: 1, padding: '8px', borderRadius: '4px', border: 'none', marginRight: '8px' }}
+                                />
+                                {editQuestionForm.answerOptions.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => removeEditAnswerOption(index)}
+                                        style={{ background: '#d32f2f', color: '#fff', border: 'none', borderRadius: '4px', padding: '5px 10px' }}
+                                    >
+                                        Remove
+                                    </button>
+                                )}
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={addEditAnswerOption}
+                            style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '4px', padding: '8px 16px', marginTop: '10px' }}
+                        >
+                            Add Option
+                        </button>
+                    </div>
+                ) : (
+                    // Multiple correct answers - use checkboxes
+                    <div>
+                        {editQuestionForm.answerOptions.map((option, index) => (
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                <input
+                                    type="checkbox"
                                     checked={option.isCorrect}
                                     onChange={e => updateEditAnswerOption(index, 'isCorrect', e.target.checked)}
                                     style={{ marginRight: '8px' }}

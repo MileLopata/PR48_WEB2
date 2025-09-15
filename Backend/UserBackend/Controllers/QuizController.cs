@@ -12,6 +12,7 @@ namespace UserBackend.Controllers
     public class QuizController : ControllerBase
     {
         private readonly IQuizService _quizService;
+
         public QuizController(IQuizService quizService)
         {
             _quizService = quizService;
@@ -23,13 +24,13 @@ namespace UserBackend.Controllers
         {
             var result = await _quizService.CreateQuizAsync(request);
 
-            return result.Status switch
-            {
-                ResponseStatus.CREATED =>
-                    CreatedAtAction(nameof(GetQuiz), new { id = result.Data!.Id }, result.Data),
-                ResponseStatus.BAD_REQUEST => BadRequest(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.CREATED && result.Data != null)
+                return CreatedAtAction(nameof(GetQuiz), new { id = result.Data.Id }, result.Data);
+
+            if (result.Status == ResponseStatus.BAD_REQUEST)
+                return BadRequest(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         [HttpGet("{id:int}")]
@@ -37,12 +38,13 @@ namespace UserBackend.Controllers
         {
             var result = await _quizService.GetQuizWithoutQuestions(id);
 
-            return result.Status switch
-            {
-                ResponseStatus.OK => Ok(result.Data),
-                ResponseStatus.NOT_FOUND => NotFound(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.OK)
+                return Ok(result.Data);
+
+            if (result.Status == ResponseStatus.NOT_FOUND)
+                return NotFound(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         [HttpPut("{id:int}")]
@@ -51,20 +53,23 @@ namespace UserBackend.Controllers
         {
             var result = await _quizService.UpdateQuizAsync(id, request);
 
-            return result.Status switch
-            {
-                ResponseStatus.OK => Ok(result.Data),
-                ResponseStatus.NOT_FOUND => NotFound(result.Message),
-                ResponseStatus.BAD_REQUEST => BadRequest(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.OK)
+                return Ok(result.Data);
+
+            if (result.Status == ResponseStatus.NOT_FOUND)
+                return NotFound(result.Message);
+
+            if (result.Status == ResponseStatus.BAD_REQUEST)
+                return BadRequest(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllQuizzes()
         {
-            var result = await _quizService.GetAllQuizzesAsync();
-            return Ok(result);
+            var quizzes = await _quizService.GetAllQuizzesAsync();
+            return quizzes.Count > 0 ? Ok(quizzes) : NoContent();
         }
 
         [HttpDelete("{id:int}")]
@@ -72,25 +77,25 @@ namespace UserBackend.Controllers
         public async Task<IActionResult> DeleteQuiz(int id)
         {
             var result = await _quizService.DeleteQuizAsync(id);
-            return result.Status switch
-            {
-                ResponseStatus.OK => Ok(result.Message),
-                ResponseStatus.NOT_FOUND => NotFound(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+
+            if (result.Status == ResponseStatus.OK)
+                return Ok(result.Message);
+
+            if (result.Status == ResponseStatus.NOT_FOUND)
+                return NotFound(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
-        //////
 
         [HttpGet("{quizId:int}/questions")]
         public async Task<IActionResult> GetQuizQuestions(int quizId)
         {
-            List<QuestionDTO>? result = await _quizService.GetQuizQuestions(quizId);
+            var questions = await _quizService.GetQuizQuestions(quizId);
 
-            if (result == null)
-            {
+            if (questions == null)
                 return NotFound($"Quiz with ID {quizId} not found.");
-            }
-            return Ok(result);
+
+            return Ok(questions);
         }
 
         [HttpPost("{quizId:int}/questions")]
@@ -108,15 +113,13 @@ namespace UserBackend.Controllers
 
             var result = await _quizService.CreateQuestionAsync(dto);
 
-            return result.Status switch
-            {
-                ResponseStatus.CREATED => CreatedAtAction(
-                    nameof(GetQuestion),
-                    new { quizId, questionId = result.Data?.Id },
-                    result.Data),
-                ResponseStatus.BAD_REQUEST => BadRequest(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.CREATED && result.Data != null)
+                return CreatedAtAction(nameof(GetQuestion), new { quizId, questionId = result.Data.Id }, result.Data);
+
+            if (result.Status == ResponseStatus.BAD_REQUEST)
+                return BadRequest(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         [HttpGet("{quizId}/questions/{questionId}")]
@@ -124,37 +127,34 @@ namespace UserBackend.Controllers
         {
             var result = await _quizService.GetQuestionAsync(questionId);
 
-            return result.Status switch
-            {
-                ResponseStatus.OK => Ok(result.Data),
-                ResponseStatus.NOT_FOUND => NotFound(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.OK)
+                return Ok(result.Data);
+
+            if (result.Status == ResponseStatus.NOT_FOUND)
+                return NotFound(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         [HttpPut("{quizId}/questions/{questionId}")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> UpdateQuestion(int quizId, int questionId, [FromBody] UpdateQuestionRequestDTO request)
         {
-            if (quizId <= 0)
-            {
-                return BadRequest("Invalid Quiz Id");
-            }
-
-            if (questionId <= 0)
-            {
-                return BadRequest("Invalid Question Id");
-            }
+            if (quizId <= 0 || questionId <= 0)
+                return BadRequest("Invalid Quiz or Question Id");
 
             var result = await _quizService.UpdateQuestionAsync(questionId, request);
 
-            return result.Status switch
-            {
-                ResponseStatus.OK => Ok(result.Data),
-                ResponseStatus.NOT_FOUND => NotFound(result.Message),
-                ResponseStatus.BAD_REQUEST => BadRequest(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.OK)
+                return Ok(result.Data);
+
+            if (result.Status == ResponseStatus.NOT_FOUND)
+                return NotFound(result.Message);
+
+            if (result.Status == ResponseStatus.BAD_REQUEST)
+                return BadRequest(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         [HttpDelete("{quizId}/questions/{questionId}")]
@@ -163,13 +163,16 @@ namespace UserBackend.Controllers
         {
             var result = await _quizService.DeleteQuestionAsync(questionId);
 
-            return result.Status switch
-            {
-                ResponseStatus.OK => Ok(result.Message),
-                ResponseStatus.NOT_FOUND => NotFound(result.Message),
-                ResponseStatus.CONFLICT => Conflict(result.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError, result.Message)
-            };
+            if (result.Status == ResponseStatus.OK)
+                return Ok(result.Message);
+
+            if (result.Status == ResponseStatus.NOT_FOUND)
+                return NotFound(result.Message);
+
+            if (result.Status == ResponseStatus.CONFLICT)
+                return Conflict(result.Message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
     }
 }

@@ -21,28 +21,27 @@ namespace UserBackend.Service
             _questionRepo = questionRepo;
             _mapper = mapper;
         }
+
         public async Task<ResponseData<QuestionDTO>> CreateQuestionAsync(CreateQuestionDTO request)
         {
             try
             {
                 if (request.AnswerOptions.Count == 0)
-                {
                     return new ResponseData<QuestionDTO>
                     {
                         Status = ResponseStatus.BAD_REQUEST,
                         Message = "At least one answer option is required."
                     };
-                }
-                Quiz? quiz = await _quizRepo.GetByIdAsync(request.QuizId);
-                if (quiz is null)
-                {
+
+                var quiz = await _quizRepo.GetByIdAsync(request.QuizId);
+                if (quiz == null)
                     return new ResponseData<QuestionDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = $"Quiz with id {request.QuizId} not found."
                     };
-                }
-                Question question = new Question
+
+                var question = new Question
                 {
                     QuizId = request.QuizId,
                     Text = request.Text,
@@ -62,8 +61,7 @@ namespace UserBackend.Service
                 await _questionRepo.SaveChangesAsync();
                 await _quizRepo.SaveChangesAsync();
 
-                QuestionDTO questionDTO = _mapper.Map<QuestionDTO>(question);
-
+                var questionDTO = _mapper.Map<QuestionDTO>(question);
                 return new ResponseData<QuestionDTO>(questionDTO, ResponseStatus.CREATED, "Question created successfully.");
             }
             catch (Exception ex)
@@ -80,16 +78,14 @@ namespace UserBackend.Service
         {
             try
             {
-                if(string.IsNullOrWhiteSpace(request.Title))
-                {
+                if (string.IsNullOrWhiteSpace(request.Title))
                     return new ResponseData<QuizDTO>
                     {
                         Status = ResponseStatus.BAD_REQUEST,
                         Message = "Quiz title cannot be empty."
                     };
-                }
 
-                Quiz quiz = new Quiz
+                var quiz = new Quiz
                 {
                     Title = request.Title,
                     Description = request.Description ?? string.Empty,
@@ -98,13 +94,12 @@ namespace UserBackend.Service
                     Subjects = request.Subjects.Select(s => new QuizSubjectLink { Subject = s }).ToList()
                 };
 
-                Quiz? createdQuiz = await _quizRepo.AddAsync(quiz);
+                var createdQuiz = await _quizRepo.AddAsync(quiz);
+                var quizDTO = _mapper.Map<QuizDTO>(createdQuiz);
 
-                QuizDTO quizDTO = _mapper.Map<QuizDTO>(createdQuiz);
-
-                return new ResponseData<QuizDTO>(quizDTO, ResponseStatus.CREATED, "Quiz created successfully.");    
+                return new ResponseData<QuizDTO>(quizDTO, ResponseStatus.CREATED, "Quiz created successfully.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ResponseData<QuizDTO>
                 {
@@ -118,20 +113,18 @@ namespace UserBackend.Service
         {
             try
             {
-                Question? question = await _questionRepo.GetByIdAsync(questionId);
-                if (question is null)
-                {
+                var question = await _questionRepo.GetByIdAsync(questionId);
+                if (question == null)
                     return new ResponseData<bool>
                     {
                         Status = ResponseStatus.NOT_FOUND,
-                        Message = $"Question with id {questionId} not found.",
-                        //Data = false
+                        Message = $"Question with id {questionId} not found."
                     };
-                }
+
                 await _questionRepo.DeleteAsync(questionId);
 
-                Quiz? quiz = await _quizRepo.GetByIdAsync(question.QuizId);
-                if (quiz is not null)
+                var quiz = await _quizRepo.GetByIdAsync(question.QuizId);
+                if (quiz != null)
                 {
                     quiz.NumberOfQuestions--;
                     await _quizRepo.UpdateAsync(quiz);
@@ -139,7 +132,7 @@ namespace UserBackend.Service
 
                 await _questionRepo.SaveChangesAsync();
                 await _quizRepo.SaveChangesAsync();
-                
+
                 return new ResponseData<bool>
                 {
                     Status = ResponseStatus.OK,
@@ -160,7 +153,7 @@ namespace UserBackend.Service
                 return new ResponseData<bool>
                 {
                     Status = ResponseStatus.INTERNAL_SERVER_ERROR,
-                    Message = "An error occurred while deleting the question",
+                    Message = "An error occurred while deleting the question" + ex.ToString(),
                     Data = false
                 };
             }
@@ -170,53 +163,32 @@ namespace UserBackend.Service
         {
             try
             {
-                Quiz? quiz =  _quizRepo.GetByIdAsync(id).Result;
-                if(quiz is null)
-                {
+                var quiz = await _quizRepo.GetByIdAsync(id);
+                if (quiz == null)
                     return new ResponseData<bool>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "Quiz not found.",
                         Data = false
                     };
-                }
-                bool isDeleted = await _quizRepo.DeleteAsync(id);
-                /*
-                if(isDeleted)
-                {
-                    return new ResponseData<bool>
-                    {
-                        Status = ResponseStatus.OK,
-                        Message = "Quiz deleted successfully.",
-                        Data = true
-                    };
-                }
-                else
-                {
-                    return new ResponseData<bool>
-                    {
-                        Status = ResponseStatus.INTERNAL_SERVER_ERROR,
-                        Message = "Failed to delete the quiz.",
-                        Data = false
-                    };
-                }
-                */
+
+                var isDeleted = await _quizRepo.DeleteAsync(id);
                 if (!isDeleted)
-                {
                     return new ResponseData<bool>
                     {
                         Status = ResponseStatus.INTERNAL_SERVER_ERROR,
                         Message = "Failed to delete the quiz.",
                         Data = false
                     };
-                }
+
                 return new ResponseData<bool>
                 {
                     Status = ResponseStatus.OK,
                     Message = "Quiz deleted successfully.",
                     Data = true
                 };
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new ResponseData<bool>
                 {
@@ -229,34 +201,34 @@ namespace UserBackend.Service
 
         public async Task<List<QuizDTO>> GetAllQuizzesAsync()
         {
-            IEnumerable<Quiz> quizzes = await _quizRepo.GetAllAsync();
-
-            return quizzes.Select(quiz => new QuizDTO 
-            { 
+            var quizzes = await _quizRepo.GetAllAsync();
+            var quizList = quizzes.Select(quiz => new QuizDTO
+            {
                 Id = quiz.Id,
-                Title = quiz.Title, 
+                Title = quiz.Title,
                 Description = quiz.Description,
                 LevelOfDifficulty = quiz.LevelOfDifficulty,
                 NumberOfQuestions = quiz.NumberOfQuestions,
                 Subjects = quiz.Subjects.Select(s => s.Subject).ToList(),
                 TimeLimit = quiz.TimeLimit
             }).ToList();
+
+            return quizList;
         }
 
         public async Task<ResponseData<QuestionDTO>> GetQuestionAsync(int questionId)
         {
             try
             {
-                Question? question = await _questionRepo.GetByIdAsync(questionId);
-                if (question is null)
-                {
+                var question = await _questionRepo.GetByIdAsync(questionId);
+                if (question == null)
                     return new ResponseData<QuestionDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = $"Question with id {questionId} not found."
                     };
-                }
-                QuestionDTO questionDTO = _mapper.Map<QuestionDTO>(question);
+
+                var questionDTO = _mapper.Map<QuestionDTO>(question);
                 return new ResponseData<QuestionDTO>(questionDTO, ResponseStatus.OK, "Question retrieved successfully.");
             }
             catch (Exception ex)
@@ -273,18 +245,15 @@ namespace UserBackend.Service
         {
             try
             {
-                Quiz? quiz = await _quizRepo.GetByIdAsync(quizId);
-                if(quiz is null)
-                {
+                var quiz = await _quizRepo.GetByIdAsync(quizId);
+                if (quiz == null)
                     return null;
-                }   
-                IEnumerable<Question> questions = await _questionRepo.GetAllByQuizIdAsync(quizId);
 
-                List<QuestionDTO> questionDTOs = _mapper.Map<List<QuestionDTO>>(questions);
-
+                var questions = await _questionRepo.GetAllByQuizIdAsync(quizId);
+                var questionDTOs = _mapper.Map<List<QuestionDTO>>(questions);
                 return questionDTOs;
             }
-            catch(Exception ex)
+            catch
             {
                 return null;
             }
@@ -294,19 +263,18 @@ namespace UserBackend.Service
         {
             try
             {
-                Quiz? quiz = await _quizRepo.GetByIdAsync(quizId);
-                if(quiz is null)
-                {
+                var quiz = await _quizRepo.GetByIdAsync(quizId);
+                if (quiz == null)
                     return new ResponseData<QuizDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "Quiz not found."
                     };
-                }
-                QuizDTO quizDTO = _mapper.Map<QuizDTO>(quiz);
 
+                var quizDTO = _mapper.Map<QuizDTO>(quiz);
                 return new ResponseData<QuizDTO>(quizDTO, ResponseStatus.OK, "Quiz retrieved successfully.");
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new ResponseData<QuizDTO>
                 {
@@ -320,22 +288,20 @@ namespace UserBackend.Service
         {
             try
             {
-                Question? existingQuestion = await _questionRepo.GetByIdAsync(id);
-                if (existingQuestion is null)
-                {
+                var existingQuestion = await _questionRepo.GetByIdAsync(id);
+                if (existingQuestion == null)
                     return new ResponseData<QuestionDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = $"Question with id {id} not found."
                     };
-                }
 
                 existingQuestion.Type = request.Type;
                 existingQuestion.Text = request.Text;
-                existingQuestion.Points = request.Points; 
+                existingQuestion.Points = request.Points;
 
                 existingQuestion.AnswerOptions.Clear();
-                foreach (QuestionAnswerOptionDTO optionDTO in request.AnswerOptions)
+                foreach (var optionDTO in request.AnswerOptions)
                 {
                     existingQuestion.AnswerOptions.Add(new QuestionAnswerOption
                     {
@@ -348,7 +314,7 @@ namespace UserBackend.Service
                 await _questionRepo.UpdateAsync(existingQuestion);
                 await _questionRepo.SaveChangesAsync();
 
-                QuestionDTO questionDTO = _mapper.Map<QuestionDTO>(existingQuestion);
+                var questionDTO = _mapper.Map<QuestionDTO>(existingQuestion);
                 return new ResponseData<QuestionDTO>(questionDTO, ResponseStatus.OK, "Question updated successfully.");
             }
             catch (Exception ex)
@@ -356,7 +322,7 @@ namespace UserBackend.Service
                 return new ResponseData<QuestionDTO>
                 {
                     Status = ResponseStatus.INTERNAL_SERVER_ERROR,
-                    Message = "An error occurred while updating the question"
+                    Message = "An error occurred while updating the question" + ex.ToString()
                 };
             }
         }
@@ -366,23 +332,19 @@ namespace UserBackend.Service
             try
             {
                 var quiz = await _quizRepo.GetByIdAsync(id);
-                if (quiz is null)
-                {
+                if (quiz == null)
                     return new ResponseData<QuizDTO>
                     {
                         Status = ResponseStatus.NOT_FOUND,
                         Message = "Quiz not found."
                     };
-                }
 
                 if (string.IsNullOrWhiteSpace(request.Title))
-                {
                     return new ResponseData<QuizDTO>
                     {
                         Status = ResponseStatus.BAD_REQUEST,
                         Message = "Quiz title cannot be empty."
                     };
-                }
 
                 quiz.Title = request.Title;
                 quiz.Description = request.Description ?? string.Empty;
@@ -400,14 +362,14 @@ namespace UserBackend.Service
                 if (subjectsChanged)
                 {
                     quiz.Subjects.Clear();
-                    foreach (QuizSubject subject in newSubjects)
+                    foreach (var subject in newSubjects)
                     {
                         quiz.Subjects.Add(new QuizSubjectLink { QuizId = quiz.Id, Subject = subject });
                     }
                 }
 
-                Quiz? updatedQuiz = await _quizRepo.UpdateAsync(quiz);
-                QuizDTO quizDTO = _mapper.Map<QuizDTO>(updatedQuiz);
+                var updatedQuiz = await _quizRepo.UpdateAsync(quiz);
+                var quizDTO = _mapper.Map<QuizDTO>(updatedQuiz);
 
                 return new ResponseData<QuizDTO>(quizDTO, ResponseStatus.OK, "Quiz updated successfully.");
             }
