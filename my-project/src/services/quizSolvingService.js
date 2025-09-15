@@ -51,3 +51,19 @@ export async function getUserAttempts() {
     
     return response.json();
 }
+
+export async function getQuizLeaderboard(quizId) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`https://localhost:7042/api/QuizSolvingTry/leaderboard/${quizId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error || 'Failed to fetch quiz leaderboard');
+    }
+    
+    return response.json();
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getAllQuizzes, createQuiz, updateQuiz, deleteQuiz } from '../services/quizService';
 import { createQuestion, getQuizQuestions, updateQuestion, deleteQuestion } from '../services/questionService';import { QuizLevelNames, QuizSubjectNames } from '../models/quiz';
 import '../styles/AdminStartPageStyle.css'; 
+import { useNavigate } from 'react-router-dom';
 
 function AdminStartPage() {
     const [quizzes, setQuizzes] = useState([]);
@@ -32,6 +33,8 @@ function AdminStartPage() {
     type: 'MULTIPLE_CHOICE_ONE_CORRECT',
     answerOptions: []
 });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchQuizzes();
@@ -317,11 +320,30 @@ function AdminStartPage() {
     }
 };
 
+const handleLogout = () => {
+    // Clear the token from localStorage
+    localStorage.removeItem('token');
+    
+    // Navigate back to login page
+    navigate('/login');
+};
+
     return (
         <div className="admin-bg">
-            <div className="admin-container" style={{ maxWidth: '1400px', width: '98vw', display: 'flex', gap: '32px', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+            <div className="admin-container" style={{ maxWidth: '1400px', width: '98vw', display: 'flex', gap: '32px', justifyContent: 'flex-start', alignItems: 'flex-start', position: 'relative' }}>
+                
+
+
+                
                 {/* Add Quiz Form (Left) */}
                 <div className="add-quiz-form" style={{ flex: 1, minWidth: '320px', maxWidth: '400px' }}>
+                                    <button 
+                    onClick={handleLogout}
+                    className="logout-btn-inline"
+                    title="Logout"
+                >
+                    🚪 Logout
+                </button>
                     <h1>Admin Dashboard</h1>
                     <form onSubmit={handleSubmit}>
                         <input

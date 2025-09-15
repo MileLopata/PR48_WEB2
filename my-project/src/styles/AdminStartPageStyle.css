@@ -1,4 +1,5 @@
 .admin-bg {
+    position: relative; /* Add this to make absolute positioning work correctly */
     min-height: 100vh;
     width: 100vw;
     background: linear-gradient(135deg, #1976d2 0%, #0d47a1 60%, #ff9800 100%);
@@ -254,4 +255,80 @@
 .view-questions-btn:hover {
     background: #7b1fa2;
     transform: scale(1.05);
+}
+
+/* Add this to your existing AdminStartPageStyle.css */
+
+.logout-btn {
+    position: absolute; /* Changed from fixed to absolute */
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #f44336, #d32f2f);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+    background: linear-gradient(45deg, #d32f2f, #f44336);
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+}
+
+/* New inline logout button style */
+.logout-btn-inline {
+    position: absolute;
+    top: 10px; 
+    left: 50px;
+    background: linear-gradient(45deg, #f44336, #d32f2f);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.logout-btn-inline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+    background: linear-gradient(45deg, #d32f2f, #f44336);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .logout-btn {
+        top: 10px;
+        left: 10px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logout-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
 }

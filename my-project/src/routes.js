@@ -6,6 +6,7 @@ import RegularUserStartPage from "./pages/RegularUserStartPage";
 import QuizTakingPage from './pages/QuizTakingPage';
 import QuizResultsPage from './pages/QuizResultsPage';
 import MyResultsPage from './pages/MyResultsPage';
+import LeaderboardPage from './pages/LeaderboardPage';
 import { isLoggedIn } from "./utils/auth";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import RoleProtectedRoute from "./components/routing/RoleProtectedRoute";
@@ -40,6 +41,9 @@ export function AppRoutes() {
 
             {/* Protected route for my results */}
             <Route path="/my-results" element={<ProtectedRoute><MyResultsPage /></ProtectedRoute>} />
+
+            {/* Protected route for leaderboard */}
+            <Route path="/leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
         </Routes>
     );
 }

@@ -80,6 +80,11 @@ function RegularUserStartPage() {
         });
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
     const getDifficultyClass = (difficulty) => {
         switch (difficulty) {
             case 'EASY': return 'difficulty-easy';
@@ -120,10 +125,22 @@ function RegularUserStartPage() {
                         </div>
                         <div className="header-actions">
                             <button 
+                                onClick={handleLogout}
+                                className="logout-btn"
+                            >
+                                🚪 Logout
+                            </button>
+                            <button 
                                 onClick={() => navigate('/my-results')} 
                                 className="my-results-btn"
                             >
                                 📊 My Results
+                            </button>
+                            <button 
+                                onClick={() => navigate('/leaderboard')} 
+                                className="leaderboard-btn"
+                            >
+                                🏆 Leaderboards
                             </button>
                         </div>
                     </div>
