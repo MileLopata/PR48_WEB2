@@ -1,16 +1,74 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { getAllQuizzes } from '../services/quizService';
-import { getCurrentUser } from '../services/userService'; // Add this import
-import { QuizLevelNames, QuizSubjectNames } from '../models/quiz';
+import { getCurrentUser, getProfilePicture } from '../services/userService';
+import { QuizLevelNames, QuizSubjectNames, QuizDifficultyLevels } from '../models/quiz';
 import '../styles/RegularUserStartPageStyle.css';
 import { useNavigate } from 'react-router-dom';
+
+// Move ProfilePicture component outside to prevent re-creation on every render
+const ProfilePicture = React.memo(({ currentUser }) => {
+    const [imageSrc, setImageSrc] = useState(null);
+    const [imageError, setImageError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchProfilePicture = async () => {
+            if (!currentUser || imageSrc) return;
+            
+            setIsLoading(true);
+            try {
+                const blob = await getProfilePicture();
+                const imageUrl = URL.createObjectURL(blob);
+                setImageSrc(imageUrl);
+                setImageError(false);
+            } catch (error) {
+                console.error('Failed to fetch profile picture:', error);
+                setImageError(true);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchProfilePicture();
+    }, [currentUser, imageSrc]);
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            if (imageSrc) {
+                URL.revokeObjectURL(imageSrc);
+            }
+        };
+    }, [imageSrc]);
+
+    return (
+        <div className="profile-picture">
+            {isLoading ? (
+                <div className="profile-placeholder">
+                    <span style={{ fontSize: '12px' }}>...</span>
+                </div>
+            ) : imageSrc && !imageError ? (
+                <img 
+                    src={imageSrc}
+                    alt="Profile" 
+                    className="profile-img"
+                    onError={() => setImageError(true)}
+                />
+            ) : (
+                <div className="profile-placeholder">
+                    {(currentUser?.username || currentUser?.Username || 'U').charAt(0).toUpperCase()}
+                </div>
+            )}
+        </div>
+    );
+});
 
 function RegularUserStartPage() {
     const [quizzes, setQuizzes] = useState([]);
     const [filteredQuizzes, setFilteredQuizzes] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const [currentUser, setCurrentUser] = useState(null); // Add user state
+    const [currentUser, setCurrentUser] = useState(null);
     
     // Filter states
     const [searchTerm, setSearchTerm] = useState('');
@@ -38,10 +96,11 @@ function RegularUserStartPage() {
             });
         }
 
-        // Filter by difficulty
+        // Filter by difficulty - use model constants for comparison
         if (selectedDifficulty) {
+            const difficultyValue = parseInt(selectedDifficulty);
             filtered = filtered.filter(quiz => 
-                (quiz.levelOfDifficulty || quiz.LevelOfDifficulty) === selectedDifficulty
+                (quiz.levelOfDifficulty || quiz.LevelOfDifficulty) === difficultyValue
             );
         }
 
@@ -50,7 +109,7 @@ function RegularUserStartPage() {
 
     useEffect(() => {
         fetchQuizzes();
-        fetchCurrentUser(); // Add this line
+        fetchCurrentUser();
     }, []);
 
     useEffect(() => {
@@ -60,6 +119,7 @@ function RegularUserStartPage() {
     async function fetchQuizzes() {
         try {
             setLoading(true);
+            setError(''); // Clear previous errors
             const data = await getAllQuizzes();
             setQuizzes(data.data || data);
         } catch (err) {
@@ -69,24 +129,15 @@ function RegularUserStartPage() {
         }
     }
 
-    // Add this function
     async function fetchCurrentUser() {
         try {
-            console.log('Fetching current user...'); // Keep this if you want
+            console.log('Fetching current user...');
             const userData = await getCurrentUser();
-            console.log('User data received:', userData); // Keep this if you want
+            console.log('User data received:', userData);
             setCurrentUser(userData);
-            
-            // Remove this debugging code since it's working:
-            // const token = localStorage.getItem('token');
-            // const response = await fetch('https://localhost:7042/api/User/me/profile-picture', {
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // });
-            // console.log('Profile picture response status:', response.status);
         } catch (err) {
             console.error('Failed to fetch user data:', err);
+            // Don't show error to user for profile picture failures
         }
     }
 
@@ -109,12 +160,20 @@ function RegularUserStartPage() {
         navigate('/login');
     };
 
+    // Use model constants for difficulty classes
     const getDifficultyClass = (difficulty) => {
         switch (difficulty) {
-            case 'EASY': return 'difficulty-easy';
-            case 'NORMAL': return 'difficulty-normal';
-            case 'HARD': return 'difficulty-hard';
-            default: return 'difficulty-normal';
+            case QuizDifficultyLevels.BEGINNER:
+            case QuizDifficultyLevels.EASY:
+                return 'difficulty-easy';
+            case QuizDifficultyLevels.NORMAL:
+            case QuizDifficultyLevels.INTERMEDIATE:
+                return 'difficulty-normal';
+            case QuizDifficultyLevels.HARD:
+            case QuizDifficultyLevels.NIGHTMARE:
+                return 'difficulty-hard';
+            default: 
+                return 'difficulty-normal';
         }
     };
 
@@ -123,10 +182,6 @@ function RegularUserStartPage() {
         quizzes.flatMap(quiz => quiz.subjects || quiz.Subjects || [])
     )].sort();
 
-    // Get unique difficulties from all quizzes
-    const allDifficulties = [...new Set(
-        quizzes.map(quiz => quiz.levelOfDifficulty || quiz.LevelOfDifficulty)
-    )].filter(Boolean).sort();
 
     if (loading) {
         return (
@@ -137,65 +192,6 @@ function RegularUserStartPage() {
             </div>
         );
     }
-
-    // Add this component inside your RegularUserStartPage component:
-    const ProfilePicture = ({ currentUser }) => {
-        const [imageSrc, setImageSrc] = useState(null);
-        const [imageError, setImageError] = useState(false);
-
-        useEffect(() => {
-            const fetchProfilePicture = async () => {
-                try {
-                    const token = localStorage.getItem('token');
-                    const response = await fetch('https://localhost:7042/api/User/me/profile-picture', {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        const blob = await response.blob();
-                        const imageUrl = URL.createObjectURL(blob);
-                        setImageSrc(imageUrl);
-                        setImageError(false);
-                    } else {
-                        setImageError(true);
-                    }
-                } catch (error) {
-                    console.error('Failed to fetch profile picture:', error);
-                    setImageError(true);
-                }
-            };
-
-            if (currentUser) {
-                fetchProfilePicture();
-            }
-
-            // Cleanup function to revoke the object URL
-            return () => {
-                if (imageSrc) {
-                    URL.revokeObjectURL(imageSrc);
-                }
-            };
-        }, [currentUser, imageSrc]); // Fixed dependency array
-
-        return (
-            <div className="profile-picture">
-                {imageSrc && !imageError ? (
-                    <img 
-                        src={imageSrc}
-                        alt="Profile" 
-                        className="profile-img"
-                        onError={() => setImageError(true)}
-                    />
-                ) : (
-                    <div className="profile-placeholder">
-                        {(currentUser?.username || currentUser?.Username || 'U').charAt(0).toUpperCase()}
-                    </div>
-                )}
-            </div>
-        );
-    };
 
     return (
         <div className="user-bg">
@@ -253,7 +249,7 @@ function RegularUserStartPage() {
                             <input
                                 id="search"
                                 type="text"
-                                placeholder="Search by title..."
+                                placeholder="Search by title "
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="filter-input"
@@ -286,11 +282,12 @@ function RegularUserStartPage() {
                                 className="filter-select"
                             >
                                 <option value="">All Difficulties</option>
-                                {allDifficulties.map(difficulty => (
-                                    <option key={difficulty} value={difficulty}>
-                                        {QuizLevelNames[difficulty] || difficulty}
-                                    </option>
-                                ))}
+                                <option value={QuizDifficultyLevels.BEGINNER}>Beginner</option>
+                                <option value={QuizDifficultyLevels.EASY}>Easy</option>
+                                <option value={QuizDifficultyLevels.NORMAL}>Normal</option>
+                                <option value={QuizDifficultyLevels.INTERMEDIATE}>Intermediate</option>
+                                <option value={QuizDifficultyLevels.HARD}>Hard</option>
+                                <option value={QuizDifficultyLevels.NIGHTMARE}>Nightmare</option>
                             </select>
                         </div>
 
@@ -366,6 +363,11 @@ function RegularUserStartPage() {
                     ) : (
                         <div className="no-quizzes">
                             <p>No quizzes match your current filters.</p>
+                            {(searchTerm || selectedSubject || selectedDifficulty) && (
+                                <button onClick={clearFilters} className="clear-filters-btn">
+                                    Clear Filters
+                                </button>
+                            )}
                         </div>
                     )}
                 </div>

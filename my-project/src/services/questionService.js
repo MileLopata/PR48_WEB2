@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7042/api/Quiz';
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/Quiz`;
 
 export async function getQuizQuestions(quizId) {
     const token = localStorage.getItem('token');

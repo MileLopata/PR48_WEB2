@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getAllQuizzes, createQuiz, updateQuiz, deleteQuiz } from '../services/quizService';
-import { createQuestion, getQuizQuestions, updateQuestion, deleteQuestion } from '../services/questionService';import { QuizLevelNames, QuizSubjectNames } from '../models/quiz';
+import { createQuestion, getQuizQuestions, updateQuestion, deleteQuestion } from '../services/questionService';
+import { QuizLevelNames, QuizSubjectNames, QuizDifficultyLevels } from '../models/quiz';
+import { QuestionTypes } from '../models/question';
 import { getAllQuizResults } from '../services/quizSolvingService';
 import '../styles/AdminStartPageStyle.css'; 
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +12,7 @@ function AdminStartPage() {
     const [form, setForm] = useState({
         title: '',
         description: '',
-        levelOfDifficulty: 1,
+        levelOfDifficulty: QuizDifficultyLevels.BEGINNER, // Use model constant
         subjects: [],
         timeLimit: '00:30:00'
     });
@@ -20,7 +22,7 @@ function AdminStartPage() {
     const [questionForm, setQuestionForm] = useState({
         text: '',
         points: 1,
-        type: 'MULTIPLE_CHOICE_ONE_CORRECT',
+        type: QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT, // Use model constant
         answerOptions: [
             { text: '', isCorrect: false, fillInTheBlankCorrectAnswer: null }
         ]
@@ -29,11 +31,11 @@ function AdminStartPage() {
     const [questions, setQuestions] = useState([]);
     const [editingQuestion, setEditingQuestion] = useState(null);
     const [editQuestionForm, setEditQuestionForm] = useState({
-    text: '',
-    points: 1,
-    type: 'MULTIPLE_CHOICE_ONE_CORRECT',
-    answerOptions: []
-});
+        text: '',
+        points: 1,
+        type: QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT, // Use model constant
+        answerOptions: []
+    });
     const [viewingResults, setViewingResults] = useState(false);
     const [allResults, setAllResults] = useState([]);
     const [loadingResults, setLoadingResults] = useState(false);
@@ -57,21 +59,36 @@ function AdminStartPage() {
         e.preventDefault();
         setError('');
         try {
-            await createQuiz({
+            // Check if a quiz with the same title already exists
+            const existingQuiz = quizzes.find(quiz => 
+                (quiz.Title || quiz.title).toLowerCase() === form.title.toLowerCase()
+            );
+            
+            if (existingQuiz) {
+                setError('A quiz with this title already exists. Please choose a different title.');
+                return;
+            }
+
+            // Create quiz using proper model structure
+            const createQuizRequest = {
                 Title: form.title,
                 Description: form.description,
                 LevelOfDifficulty: form.levelOfDifficulty,
                 Subjects: form.subjects,
                 TimeLimit: form.timeLimit
-            });
+            };
+
+            await createQuiz(createQuizRequest);
+            
+            // Reset form to initial state using model constants
             setForm({
                 title: '',
                 description: '',
-                levelOfDifficulty: 1,
+                levelOfDifficulty: QuizDifficultyLevels.BEGINNER,
                 subjects: [],
                 timeLimit: '00:30:00'
             });
-            fetchQuizzes();
+            await fetchQuizzes();
         } catch (err) {
             if (
                 err.message.includes('duplicate') ||
@@ -104,11 +121,10 @@ function AdminStartPage() {
     const handleQuestionSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Prepare answer options based on question type
+            // Prepare answer options based on question type using model constants
             let answerOptions = [];
             
-            if (questionForm.type === 'TRUE_FALSE') {
-                // Ensure we always have True and False options with proper text
+            if (questionForm.type === QuestionTypes.TRUE_FALSE) {
                 const trueOption = questionForm.answerOptions.find(opt => opt.text === 'True') || { text: 'True', isCorrect: false };
                 const falseOption = questionForm.answerOptions.find(opt => opt.text === 'False') || { text: 'False', isCorrect: false };
                 
@@ -124,14 +140,13 @@ function AdminStartPage() {
                         FillInTheBlankCorrectAnswer: null
                     }
                 ];
-            } else if (questionForm.type === 'FILL_IN_THE_BLANK') {
+            } else if (questionForm.type === QuestionTypes.FILL_IN_THE_BLANK) {
                 answerOptions = [{
                     Text: '',
                     IsCorrect: null,
                     FillInTheBlankCorrectAnswer: questionForm.answerOptions[0]?.fillInTheBlankCorrectAnswer
                 }];
             } else {
-                // Multiple choice
                 answerOptions = questionForm.answerOptions.map(option => ({
                     Text: option.text,
                     IsCorrect: option.isCorrect,
@@ -139,29 +154,28 @@ function AdminStartPage() {
                 }));
             }
 
-            await createQuestion(selectedQuizForQuestions.Id || selectedQuizForQuestions.id, {
+            // Create question request using proper model structure
+            const createQuestionRequest = {
                 Text: questionForm.text,
                 Points: parseFloat(questionForm.points),
                 Type: questionForm.type,
                 AnswerOptions: answerOptions
-            });
+            };
+
+            await createQuestion(selectedQuizForQuestions.Id || selectedQuizForQuestions.id, createQuestionRequest);
             
-            // Reset form
+            // Reset form using model constants
             setQuestionForm({
                 text: '',
                 points: 1,
-                type: 'MULTIPLE_CHOICE_ONE_CORRECT',
+                type: QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT,
                 answerOptions: [
                     { text: '', isCorrect: false, fillInTheBlankCorrectAnswer: null }
                 ]
             });
             
-            // Close the question form
             setSelectedQuizForQuestions(null);
-            
-            // Refresh quiz list to update question count
             fetchQuizzes();
-            
             alert('Question added successfully!');
         } catch (err) {
             setError('Failed to create question: ' + err.message);
@@ -197,7 +211,7 @@ function AdminStartPage() {
     const fetchQuestions = async (quizId) => {
         try {
             const data = await getQuizQuestions(quizId);
-            console.log('Questions data received:', data); // Add this line
+            console.log('Questions data received:', data);
             setQuestions(data || []);
         } catch (err) {
             setError('Failed to fetch questions: ' + err.message);
@@ -206,11 +220,11 @@ function AdminStartPage() {
     };
 
     const startEditingQuestion = (question) => {
-        console.log('Original question points:', question.Points || question.points); // Debug log
+        console.log('Original question points:', question.Points || question.points);
         setEditingQuestion(question);
         setEditQuestionForm({
             text: question.Text || question.text,
-            points: parseFloat(question.Points || question.points) || 1, // Ensure it's a number
+            points: parseFloat(question.Points || question.points) || 1,
             type: question.Type || question.type,
             answerOptions: (question.AnswerOptions || question.answerOptions || []).map(option => ({
                 id: option.Id || option.id,
@@ -224,21 +238,20 @@ function AdminStartPage() {
     const handleEditQuestionSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Debug logging
             console.log('Edit form points:', editQuestionForm.points);
             console.log('Parsed points:', parseFloat(editQuestionForm.points));
             
-            // Prepare answer options based on question type
+            // Prepare answer options based on question type using model constants
             let answerOptions = [];
             
-            if (editQuestionForm.type === 'TRUE_FALSE') {
+            if (editQuestionForm.type === QuestionTypes.TRUE_FALSE) {
                 answerOptions = editQuestionForm.answerOptions.map(option => ({
                     Id: option.id || 0,
                     Text: option.text,
                     IsCorrect: option.isCorrect,
                     FillInTheBlankCorrectAnswer: null
                 }));
-            } else if (editQuestionForm.type === 'FILL_IN_THE_BLANK') {
+            } else if (editQuestionForm.type === QuestionTypes.FILL_IN_THE_BLANK) {
                 answerOptions = [{
                     Id: editQuestionForm.answerOptions[0]?.id || 0,
                     Text: '',
@@ -246,7 +259,6 @@ function AdminStartPage() {
                     FillInTheBlankCorrectAnswer: editQuestionForm.answerOptions[0]?.fillInTheBlankCorrectAnswer
                 }];
             } else {
-                // Multiple choice
                 answerOptions = editQuestionForm.answerOptions.map(option => ({
                     Id: option.id || 0,
                     Text: option.text,
@@ -255,33 +267,31 @@ function AdminStartPage() {
                 }));
             }
 
-            const payload = {
+            // Update question request using proper model structure
+            const updateQuestionRequest = {
                 Text: editQuestionForm.text,
                 Points: parseFloat(editQuestionForm.points),
                 Type: editQuestionForm.type,
                 AnswerOptions: answerOptions
             };
             
-            console.log('Update payload:', payload); // Add this line
+            console.log('Update payload:', updateQuestionRequest);
 
             await updateQuestion(
                 viewingQuestions.Id || viewingQuestions.id,
                 editingQuestion.Id || editingQuestion.id,
-                payload
+                updateQuestionRequest
             );
             
-            // Close edit form and refresh questions
             setEditingQuestion(null);
             setEditQuestionForm({
                 text: '',
                 points: 1,
-                type: 'MULTIPLE_CHOICE_ONE_CORRECT',
+                type: QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT, // Use model constant
                 answerOptions: []
             });
             
-            // Refresh questions list
             fetchQuestions(viewingQuestions.Id || viewingQuestions.id);
-            
             alert('Question updated successfully!');
         } catch (err) {
             setError('Failed to update question: ' + err.message);
@@ -290,8 +300,7 @@ function AdminStartPage() {
 
     const updateEditAnswerOption = (index, field, value) => {
         setEditQuestionForm(prev => {
-            if (field === 'isCorrect' && prev.type === 'MULTIPLE_CHOICE_ONE_CORRECT' && value === true) {
-                // For single correct answer, uncheck all others when one is checked
+            if (field === 'isCorrect' && prev.type === QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT && value === true) {
                 return {
                     ...prev,
                     answerOptions: prev.answerOptions.map((option, i) => ({
@@ -300,7 +309,6 @@ function AdminStartPage() {
                     }))
                 };
             } else {
-                // For other fields or multiple correct answers
                 return {
                     ...prev,
                     answerOptions: prev.answerOptions.map((option, i) => 
@@ -329,50 +337,46 @@ function AdminStartPage() {
     };
 
     const handleDeleteQuestion = async (questionId) => {
-    if (window.confirm('Are you sure you want to delete this question?')) {
-        try {
-            await deleteQuestion(
-                viewingQuestions.Id || viewingQuestions.id,
-                questionId
-            );
-            
-            // Refresh questions list
-            fetchQuestions(viewingQuestions.Id || viewingQuestions.id);
-            
-            // Refresh quiz list to update question count
-            fetchQuizzes();
-            
-            alert('Question deleted successfully!');
-        } catch (err) {
-            setError('Failed to delete question: ' + err.message);
+        if (window.confirm('Are you sure you want to delete this question?')) {
+            try {
+                await deleteQuestion(
+                    viewingQuestions.Id || viewingQuestions.id,
+                    questionId
+                );
+                
+                fetchQuestions(viewingQuestions.Id || viewingQuestions.id);
+                fetchQuizzes();
+                alert('Question deleted successfully!');
+            } catch (err) {
+                setError('Failed to delete question: ' + err.message);
+            }
         }
-    }
-};
+    };
 
-const handleLogout = () => {
-    // Clear the token from localStorage
-    localStorage.removeItem('token');
-    
-    // Navigate back to login page
-    navigate('/login');
-};
+    const handleLogout = () => {
+        // Clear the token from localStorage
+        localStorage.removeItem('token');
+        
+        // Navigate back to login page
+        navigate('/login');
+    };
 
-const fetchAllResults = async () => {
-    setLoadingResults(true);
-    try {
-        const data = await getAllQuizResults();
-        setAllResults(data.data || data);
-    } catch (err) {
-        setError('Failed to fetch quiz results: ' + err.message);
-    } finally {
-        setLoadingResults(false);
-    }
-};
+    const fetchAllResults = async () => {
+        setLoadingResults(true);
+        try {
+            const data = await getAllQuizResults();
+            setAllResults(data.data || data);
+        } catch (err) {
+            setError('Failed to fetch quiz results: ' + err.message);
+        } finally {
+            setLoadingResults(false);
+        }
+    };
 
-const handleViewAllResults = () => {
-    setViewingResults(true);
-    fetchAllResults();
-};
+    const handleViewAllResults = () => {
+        setViewingResults(true);
+        fetchAllResults();
+    };
 
     return (
         <div className="admin-bg">
@@ -411,12 +415,12 @@ const handleViewAllResults = () => {
                         onChange={handleChange}
                         required
                     >
-                        <option value={1}>Beginner</option>
-                        <option value={2}>Easy</option>
-                        <option value={3}>Normal</option>
-                        <option value={4}>Intermediate</option>
-                        <option value={5}>Hard</option>
-                        <option value={6}>Nightmare</option>
+                        <option value={QuizDifficultyLevels.BEGINNER}>Beginner</option>
+                        <option value={QuizDifficultyLevels.EASY}>Easy</option>
+                        <option value={QuizDifficultyLevels.NORMAL}>Normal</option>
+                        <option value={QuizDifficultyLevels.INTERMEDIATE}>Intermediate</option>
+                        <option value={QuizDifficultyLevels.HARD}>Hard</option>
+                        <option value={QuizDifficultyLevels.NIGHTMARE}>Nightmare</option>
                     </select>
                     <select
                         multiple
@@ -540,27 +544,22 @@ const handleViewAllResults = () => {
                                 e.preventDefault();
                                 setError('');
                                 try {
-                                    // Get selected subjects as strings
                                     const selectedSubjects = Array.from(new Set(editingQuiz.Subjects || editingQuiz.subjects)).map(String);
-
-                                    // Get the original subjects for this quiz
                                     const originalQuiz = quizzes.find(q => (q.Id || q.id) === (editingQuiz.Id || editingQuiz.id));
                                     const originalSubjects = (originalQuiz.Subjects || originalQuiz.subjects || []).map(String);
-
-                                    // Only send subjects that are NOT already assigned to the quiz
                                     const subjectsToSend = selectedSubjects.filter(subj => !originalSubjects.includes(subj));
 
-                                    // Build the payload
-                                    const payload = {
+                                    // Update quiz request using proper model structure
+                                    const updateQuizRequest = {
                                         Title: editingQuiz.Title || editingQuiz.title,
                                         Description: editingQuiz.Description || editingQuiz.description,
                                         LevelOfDifficulty: editingQuiz.LevelOfDifficulty || editingQuiz.levelOfDifficulty,
                                         Subjects: subjectsToSend,
                                         TimeLimit: editingQuiz.TimeLimit || editingQuiz.timeLimit
                                     };
-                                    console.log('Payload sent to backend:', payload);
+                                    console.log('Payload sent to backend:', updateQuizRequest);
 
-                                    await updateQuiz(editingQuiz.Id || editingQuiz.id, payload);
+                                    await updateQuiz(editingQuiz.Id || editingQuiz.id, updateQuizRequest);
                                     setEditingQuiz(null);
                                     fetchQuizzes();
                                 } catch (err) {
@@ -660,12 +659,12 @@ const handleViewAllResults = () => {
                             const newType = e.target.value;
                             let newAnswerOptions = [];
                             
-                            if (newType === 'TRUE_FALSE') {
+                            if (newType === QuestionTypes.TRUE_FALSE) {
                                 newAnswerOptions = [
                                     { text: 'True', isCorrect: true, fillInTheBlankCorrectAnswer: null },
                                     { text: 'False', isCorrect: false, fillInTheBlankCorrectAnswer: null }
                                 ];
-                            } else if (newType === 'FILL_IN_THE_BLANK') {
+                            } else if (newType === QuestionTypes.FILL_IN_THE_BLANK) {
                                 newAnswerOptions = [{ text: '', isCorrect: null, fillInTheBlankCorrectAnswer: '' }];
                             } else {
                                 newAnswerOptions = [{ text: '', isCorrect: false, fillInTheBlankCorrectAnswer: null }];
@@ -680,17 +679,17 @@ const handleViewAllResults = () => {
                         required
                         style={{ width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '4px', border: 'none' }}
                     >
-                        <option value="MULTIPLE_CHOICE_ONE_CORRECT">Multiple Choice (One Correct)</option>
-                        <option value="MULTIPLE_CHOICE_MULTIPLE_CORRECT">Multiple Choice (Multiple Correct)</option>
-                        <option value="TRUE_FALSE">True/False</option>
-                        <option value="FILL_IN_THE_BLANK">Fill in the Blank</option>
+                        <option value={QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT}>Multiple Choice (One Correct)</option>
+                        <option value={QuestionTypes.MULTIPLE_CHOICE_MULTIPLE_CORRECT}>Multiple Choice (Multiple Correct)</option>
+                        <option value={QuestionTypes.TRUE_FALSE}>True/False</option>
+                        <option value={QuestionTypes.FILL_IN_THE_BLANK}>Fill in the Blank</option>
                     </select>
 
                     {/* Answer Options */}
                     <div style={{ marginBottom: '15px' }}>
                         <h4>Answer Options:</h4>
                         
-                        {questionForm.type === 'TRUE_FALSE' ? (
+                        {questionForm.type === QuestionTypes.TRUE_FALSE ? (
                             // True/False options
                             <div>
                                 <label style={{ display: 'block', marginBottom: '10px' }}>
@@ -726,7 +725,7 @@ const handleViewAllResults = () => {
                                     False
                                 </label>
                             </div>
-                        ) : questionForm.type === 'FILL_IN_THE_BLANK' ? (
+                        ) : questionForm.type === QuestionTypes.FILL_IN_THE_BLANK ? (
                             // Fill in the blank
                             <div>
                                 <input
@@ -751,7 +750,7 @@ const handleViewAllResults = () => {
                                 {questionForm.answerOptions.map((option, index) => (
                                     <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                         <input
-                                            type={questionForm.type === 'MULTIPLE_CHOICE_ONE_CORRECT' ? 'radio' : 'checkbox'}
+                                            type={questionForm.type === QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT ? 'radio' : 'checkbox'}
                                             name="correctAnswer"
                                             checked={option.isCorrect}
                                             onChange={e => updateAnswerOption(index, 'isCorrect', e.target.checked)}
@@ -796,7 +795,7 @@ const handleViewAllResults = () => {
                             setQuestionForm({
                                 text: '',
                                 points: 1,
-                                type: 'MULTIPLE_CHOICE_ONE_CORRECT',
+                                type: QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT,
                                 answerOptions: [{ text: '', isCorrect: false, fillInTheBlankCorrectAnswer: null }]
                             });
                         }}
@@ -827,7 +826,7 @@ const handleViewAllResults = () => {
                                     {/* Answer Options */}
                                     <div style={{ marginTop: '10px' }}>
                                         <strong>Answer Options:</strong>
-                                        {(question.Type || question.type) === 'FILL_IN_THE_BLANK' ? (
+                                        {(question.Type || question.type) === QuestionTypes.FILL_IN_THE_BLANK ? (
                                             <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                                                 {(question.AnswerOptions || question.answerOptions || []).map((option, optIndex) => (
                                                     <li key={option.Id || option.id || optIndex}>
@@ -915,17 +914,17 @@ const handleViewAllResults = () => {
                 required
                 style={{ width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '4px', border: 'none' }}
             >
-                <option value="MULTIPLE_CHOICE_ONE_CORRECT">Multiple Choice (One Correct)</option>
-                <option value="MULTIPLE_CHOICE_MULTIPLE_CORRECT">Multiple Choice (Multiple Correct)</option>
-                <option value="TRUE_FALSE">True/False</option>
-                <option value="FILL_IN_THE_BLANK">Fill in the Blank</option>
+                <option value={QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT}>Multiple Choice (One Correct)</option>
+                <option value={QuestionTypes.MULTIPLE_CHOICE_MULTIPLE_CORRECT}>Multiple Choice (Multiple Correct)</option>
+                <option value={QuestionTypes.TRUE_FALSE}>True/False</option>
+                <option value={QuestionTypes.FILL_IN_THE_BLANK}>Fill in the Blank</option>
             </select>
 
             {/* Answer Options */}
             <div style={{ marginBottom: '15px' }}>
                 <h4>Answer Options:</h4>
                 
-                {editQuestionForm.type === 'TRUE_FALSE' ? (
+                {editQuestionForm.type === QuestionTypes.TRUE_FALSE ? (
                     <div>
                         <label style={{ display: 'block', marginBottom: '10px' }}>
                             <input
@@ -960,7 +959,7 @@ const handleViewAllResults = () => {
                             False
                         </label>
                     </div>
-                ) : editQuestionForm.type === 'FILL_IN_THE_BLANK' ? (
+                ) : editQuestionForm.type === QuestionTypes.FILL_IN_THE_BLANK ? (
                     <div>
                         <input
                             type="text"
@@ -979,7 +978,7 @@ const handleViewAllResults = () => {
                             style={{ width: '100%', padding: '8px', borderRadius: '4px', border: 'none' }}
                         />
                     </div>
-                ) : editQuestionForm.type === 'MULTIPLE_CHOICE_ONE_CORRECT' ? (
+                ) : editQuestionForm.type === QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT ? (
                     // Single correct answer - use radio buttons with same name
                     <div>
                         {editQuestionForm.answerOptions.map((option, index) => (
@@ -1068,7 +1067,7 @@ const handleViewAllResults = () => {
                     setEditQuestionForm({
                         text: '',
                         points: 1,
-                        type: 'MULTIPLE_CHOICE_ONE_CORRECT',
+                        type: QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT,
                         answerOptions: []
                     });
                 }}

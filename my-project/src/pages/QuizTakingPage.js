@@ -3,6 +3,7 @@ import { useParams, useNavigate} from 'react-router-dom';
 import { getQuizQuestions } from '../services/questionService';
 import { createQuizAttempt } from '../services/quizSolvingService';
 import { getQuizById } from '../services/quizService';
+import { QuestionTypes } from '../models/question';
 import '../styles/QuizTakingPageStyle.css';
 
 function QuizTakingPage() {
@@ -107,17 +108,8 @@ function QuizTakingPage() {
         }
 
         try {
-            // DEBUG: Log user answers to see what we have
             console.log('User Answers Object:', userAnswers);
             console.log('Questions:', questions);
-            
-            // DEBUG: Log all question IDs
-            console.log('Question IDs in array:', questions.map(q => ({ 
-                index: questions.indexOf(q), 
-                Id: q.Id, 
-                id: q.id, 
-                actualId: q.Id || q.id 
-            })));
 
             const duration = startTimeRef.current ? Date.now() - startTimeRef.current : 0;
             const durationInSeconds = Math.floor(duration / 1000);
@@ -128,12 +120,11 @@ function QuizTakingPage() {
             const seconds = durationInSeconds % 60;
             const timeSpanDuration = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-            // Prepare answers in the format expected by backend
+            // Prepare answers using model constants
             const answers = questions.map(question => {
                 const questionId = question.Id || question.id;
                 const userAnswer = userAnswers[questionId];
                 
-                // DEBUG: Log each question's answer processing
                 console.log(`Question ${questionId}:`, {
                     question: question,
                     userAnswer: userAnswer,
@@ -150,7 +141,8 @@ function QuizTakingPage() {
                     };
                 }
 
-                if (question.Type === 'FILL_IN_THE_BLANK' || question.type === 'FILL_IN_THE_BLANK') {
+                // Use model constants instead of magic strings
+                if (question.Type === QuestionTypes.FILL_IN_THE_BLANK || question.type === QuestionTypes.FILL_IN_THE_BLANK) {
                     console.log(`Fill in blank answer for ${questionId}:`, userAnswer.text);
                     return {
                         QuestionId: questionId,
@@ -167,6 +159,7 @@ function QuizTakingPage() {
                 }
             });
 
+            // Create request payload following proper model structure
             const payload = {
                 QuizId: parseInt(quizId),
                 Duration: timeSpanDuration,
@@ -190,7 +183,7 @@ function QuizTakingPage() {
             setError('Failed to submit quiz: ' + err.message);
             setIsSubmitting(false);
         }
-    }, [isSubmitting, quizId, questions, userAnswers, navigate]); // Remove 'quiz' from here
+    }, [isSubmitting, quizId, questions, userAnswers, navigate]);
 
     const nextQuestion = () => {
         if (currentQuestionIndex < questions.length - 1) {
@@ -377,14 +370,15 @@ function QuestionAnswerInput({ question, userAnswer, onAnswerChange }) {
     const handleOptionChange = (optionId, isChecked) => {
         console.log('Option changed:', { optionId, isChecked, questionType });
         
-        if (questionType === 'MULTIPLE_CHOICE_ONE_CORRECT' || questionType === 'TRUE_FALSE') {
+        // Use model constants instead of magic strings
+        if (questionType === QuestionTypes.MULTIPLE_CHOICE_ONE_CORRECT || questionType === QuestionTypes.TRUE_FALSE) {
             // Single selection
             const newAnswer = {
                 selectedOptions: isChecked ? [optionId] : []
             };
             console.log('Single selection answer:', newAnswer);
             onAnswerChange(questionId, newAnswer);
-        } else if (questionType === 'MULTIPLE_CHOICE_MULTIPLE_CORRECT') {
+        } else if (questionType === QuestionTypes.MULTIPLE_CHOICE_MULTIPLE_CORRECT) {
             // Multiple selection
             const currentOptions = userAnswer?.selectedOptions || [];
             const newOptions = isChecked 
@@ -408,7 +402,8 @@ function QuestionAnswerInput({ question, userAnswer, onAnswerChange }) {
         onAnswerChange(questionId, newAnswer);
     };
 
-    if (questionType === 'FILL_IN_THE_BLANK') {
+    // Use model constant instead of magic string
+    if (questionType === QuestionTypes.FILL_IN_THE_BLANK) {
         return (
             <div className="answer-container">
                 <input
@@ -427,7 +422,7 @@ function QuestionAnswerInput({ question, userAnswer, onAnswerChange }) {
             {answerOptions.map((option, index) => (
                 <label key={option.Id || option.id} className="answer-option">
                     <input
-                        type={questionType === 'MULTIPLE_CHOICE_MULTIPLE_CORRECT' ? 'checkbox' : 'radio'}
+                        type={questionType === QuestionTypes.MULTIPLE_CHOICE_MULTIPLE_CORRECT ? 'checkbox' : 'radio'}
                         name={`question-${questionId}`}
                         checked={userAnswer?.selectedOptions?.includes(option.Id || option.id) || false}
                         onChange={(e) => handleOptionChange(option.Id || option.id, e.target.checked)}

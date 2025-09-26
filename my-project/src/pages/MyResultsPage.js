@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserAttempts } from '../services/quizSolvingService';
 import { getQuizById } from '../services/quizService';
 import { getQuizQuestions } from '../services/questionService';
+import { QuizLevelNames } from '../models/quiz';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -57,7 +58,7 @@ function MyResultsPage() {
                     
                     // Add questions to quiz object
                     quiz.questions = questions;
-                    console.log(`Quiz ${id} with questions:`, quiz); // DEBUG
+                    console.log(`Quiz ${id} with questions:`, quiz); 
                     
                     return quiz;
                 } catch (err) {
@@ -118,19 +119,19 @@ function MyResultsPage() {
         
         console.log('Quiz for percentage calculation:', quiz);
         
-        // Try different property names for questions
+        // Use consistent property names (handle both cases)
         const questions = quiz.questions || quiz.Questions || [];
         console.log('Questions found:', questions);
         
         if (questions.length === 0) {
             console.log('No questions found for quiz', quizId);
-            return 0; // Return 0% if we can't calculate properly
+            return 0;
         }
         
-        // Calculate total points from questions
+        // Calculate total points from questions - handle both property name cases
         const totalPoints = questions.reduce((sum, q) => {
             const points = q.points || q.Points || 0;
-            console.log(`Question ${q.id}: ${points} points`);
+            console.log(`Question ${q.id || q.Id}: ${points} points`);
             return sum + points;
         }, 0);
         
@@ -145,6 +146,13 @@ function MyResultsPage() {
         console.log('Calculated percentage:', percentage);
         
         return percentage;
+    };
+
+    // Add function to get quiz difficulty display
+    const getQuizDifficultyDisplay = (quiz) => {
+        if (!quiz) return '';
+        const difficulty = quiz.LevelOfDifficulty || quiz.levelOfDifficulty;
+        return QuizLevelNames[difficulty] || difficulty || 'Unknown';
     };
 
     const getScoreColorClass = (percentage) => {
@@ -277,7 +285,7 @@ function MyResultsPage() {
                 </div>
             ) : (
                 <div className="results-content">
-                    {/* Progress Overview Section */}
+                    {/* Progress Overview Section - Enhanced with quiz info */}
                     <div className="progress-overview">
                         <h2>Progress Overview</h2>
                         <div className="quiz-progress-cards">
@@ -289,7 +297,15 @@ function MyResultsPage() {
                                 
                                 return (
                                     <div key={quizId} className="progress-card">
-                                        <h4>{quiz?.title || `Quiz ${quizId}`}</h4>
+                                        <div className="quiz-header">
+                                            <h4>{quiz?.title || quiz?.Title || `Quiz ${quizId}`}</h4>
+                                            {quiz && (
+                                                <span className="quiz-difficulty">
+                                                    {getQuizDifficultyDisplay(quiz)}
+                                                </span>
+                                            )}
+                                        </div>
+                                        
                                         <div className="progress-stats">
                                             <div className="stat">
                                                 <span>Attempts:</span>
@@ -322,7 +338,7 @@ function MyResultsPage() {
                         </div>
                     </div>
 
-                    {/* Detailed Results List */}
+                    {/* Detailed Results List - Enhanced with quiz info */}
                     <div className="results-list">
                         <h2>All Attempts</h2>
                         {attempts.map((attempt) => {
@@ -332,9 +348,23 @@ function MyResultsPage() {
                             return (
                                 <div key={attempt.id} className="result-card">
                                     <div className="result-header">
-                                        <h3 className="quiz-title">
-                                            {quiz?.title || `Quiz ${attempt.quizId}`}
-                                        </h3>
+                                        <div className="quiz-info">
+                                            <h3 className="quiz-title">
+                                                {quiz?.title || quiz?.Title || `Quiz ${attempt.quizId}`}
+                                            </h3>
+                                            {quiz && (
+                                                <div className="quiz-meta">
+                                                    <span className="quiz-difficulty">
+                                                        Difficulty: {getQuizDifficultyDisplay(quiz)}
+                                                    </span>
+                                                    {(quiz.Description || quiz.description) && (
+                                                        <span className="quiz-description">
+                                                            {quiz.Description || quiz.description}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
                                         <div className="attempt-date">
                                             {formatDate(attempt.attemptedAt)}
                                         </div>
@@ -360,7 +390,9 @@ function MyResultsPage() {
                                         
                                         <div className="stat-item">
                                             <span className="stat-label">Questions:</span>
-                                            <span className="stat-value">{quiz?.numberOfQuestions || 'N/A'}</span>
+                                            <span className="stat-value">
+                                                {quiz?.numberOfQuestions || quiz?.NumberOfQuestions || 'N/A'}
+                                            </span>
                                         </div>
                                     </div>
 
@@ -385,12 +417,17 @@ function MyResultsPage() {
                 </div>
             )}
 
-            {/* Progress Chart Modal */}
+            {/* Progress Chart Modal - Enhanced with quiz info */}
             {selectedQuizForProgress && (
                 <div className="chart-modal-overlay" onClick={() => setSelectedQuizForProgress(null)}>
                     <div className="chart-modal" onClick={e => e.stopPropagation()}>
                         <div className="chart-header">
-                            <h3>Progress for {quizDetails[selectedQuizForProgress.quizId]?.title}</h3>
+                            <div className="chart-title-info">
+                                <h3>Progress for {quizDetails[selectedQuizForProgress.quizId]?.title || quizDetails[selectedQuizForProgress.quizId]?.Title}</h3>
+                                <span className="chart-quiz-difficulty">
+                                    {getQuizDifficultyDisplay(quizDetails[selectedQuizForProgress.quizId])}
+                                </span>
+                            </div>
                             <button 
                                 className="close-btn" 
                                 onClick={() => setSelectedQuizForProgress(null)}

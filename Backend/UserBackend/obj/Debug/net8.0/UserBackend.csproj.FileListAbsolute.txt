@@ -169,3 +169,7 @@ D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\refint\UserBa
 D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\UserBackend.pdb
 D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\UserBackend.genruntimeconfig.cache
 D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\ref\UserBackend.dll
+D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\rjimswa.dswa.cache.json
+D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+D:\GitHub\pr48_2021\PR48_WEB2\Backend\UserBackend\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json

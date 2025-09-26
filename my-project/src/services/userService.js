@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7042/api/User';
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/User`;
 
 export const getCurrentUser = async () => {
     const token = localStorage.getItem('token');
@@ -15,4 +15,20 @@ export const getCurrentUser = async () => {
     }
     
     return response.json();
+};
+
+
+export const getProfilePicture = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/me/profile-picture`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    
+    if (!response.ok) {
+        throw new Error('Failed to fetch profile picture');
+    }
+    
+    return response.blob();
 };

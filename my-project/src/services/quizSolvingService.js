@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7042/api/QuizSolvingTry';
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/QuizSolvingTry`;
 
 export async function createQuizAttempt(attemptData) {
     const token = localStorage.getItem('token');
@@ -54,7 +54,7 @@ export async function getUserAttempts() {
 
 export async function getQuizLeaderboard(quizId) {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://localhost:7042/api/QuizSolvingTry/leaderboard/${quizId}`, {
+    const response = await fetch(`${API_URL}/leaderboard/${quizId}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -70,7 +70,7 @@ export async function getQuizLeaderboard(quizId) {
 
 export async function getAllQuizResults() {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://localhost:7042/api/QuizSolvingTry/admin/all-results`, {
+    const response = await fetch(`${API_URL}/admin/all-results`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

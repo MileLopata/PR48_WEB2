@@ -7,12 +7,23 @@ import QuizTakingPage from './pages/QuizTakingPage';
 import QuizResultsPage from './pages/QuizResultsPage';
 import MyResultsPage from './pages/MyResultsPage';
 import LeaderboardPage from './pages/LeaderboardPage';
-import { isLoggedIn } from "./utils/auth";
+import { isLoggedIn, getUserRole } from "./utils/auth";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import RoleProtectedRoute from "./components/routing/RoleProtectedRoute";
 
 function RootRedirect() {
-    return isLoggedIn() ? <Navigate to="/regular-start" replace /> : <Navigate to="/login" replace />;
+    if (!isLoggedIn()) {
+        return <Navigate to="/login" replace />;
+    }
+    
+    const role = getUserRole();
+    if (role === 'ADMIN') {
+        return <Navigate to="/admin-start" replace />;
+    } else if (role === 'REGULAR') {
+        return <Navigate to="/regular-user" replace />;
+    } else {
+        return <Navigate to="/login" replace />;
+    }
 }
 
 export function AppRoutes() {
@@ -22,22 +33,19 @@ export function AppRoutes() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
 
+            {/* Protected Routes for Regular Users */}
             <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
-                <Route path="/regular-start" element={<RegularUserStartPage />} />
-                <Route path="/regular-user" element={<ProtectedRoute><RegularUserStartPage /></ProtectedRoute>} />
+                <Route path="/regular-user" element={<RegularUserStartPage />} />
+                <Route path="/quiz/:quizId" element={<QuizTakingPage />} />
+                <Route path="/quiz-results/:attemptId" element={<QuizResultsPage />} />
+                <Route path="/my-results" element={<MyResultsPage />} />
+                <Route path="/leaderboard" element={<LeaderboardPage />} />
             </Route>
 
-            <Route element={<RoleProtectedRoute allowedRoles={['ADMIN', 'Admin']} />}>
+            {/* Admin Protected Routes */}
+            <Route element={<RoleProtectedRoute allowedRoles={['ADMIN']} />}>
                 <Route path="/admin-start" element={<AdminStartPage />} />
             </Route>
-
-            <Route path="/quiz/:quizId" element={<ProtectedRoute><QuizTakingPage /></ProtectedRoute>} />
-            
-            <Route path="/quiz-results/:attemptId" element={<ProtectedRoute><QuizResultsPage /></ProtectedRoute>} />
-
-            <Route path="/my-results" element={<ProtectedRoute><MyResultsPage /></ProtectedRoute>} />
-
-            <Route path="/leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
         </Routes>
     );
 }

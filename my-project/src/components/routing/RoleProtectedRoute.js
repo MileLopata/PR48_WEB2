@@ -8,7 +8,7 @@ const RoleProtectedRoute = ({ allowedRoles }) => {
 
     const userRole = getUserRole();
     if (!userRole || !allowedRoles.includes(userRole)) {
-        return <Navigate to="/regular-start" replace />;
+        return <Navigate to="/regular-user" replace />; 
     }
 
     return <Outlet />;

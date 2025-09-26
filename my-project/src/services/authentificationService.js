@@ -1,7 +1,6 @@
 // src/services/authService.js
 
-const API_URL = 'https://localhost:7042/api/Authentification';
-
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/Authentification`;
 
 export async function login({ emailOrUsername, password }) {
     const response = await fetch(`${API_URL}/login`, {

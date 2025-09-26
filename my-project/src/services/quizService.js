@@ -1,4 +1,5 @@
-const API_URL = 'https://localhost:7042/api/Quiz';
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/Quiz`;
+const QUESTION_API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/Question`;
 
 export async function getAllQuizzes() {
     const response = await fetch(`${API_URL}`);
@@ -31,7 +32,7 @@ export async function createQuiz(quizData) {
 
 export async function updateQuiz(id, quizData) {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://localhost:7042/api/Quiz/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ export async function updateQuiz(id, quizData) {
 
 export async function deleteQuiz(id) {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://localhost:7042/api/Quiz/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`
@@ -84,7 +85,7 @@ export async function getQuizById(id) {
 
 export async function getQuizQuestions(quizId) {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://localhost:7042/api/Question/quiz/${quizId}`, {
+    const response = await fetch(`${QUESTION_API_URL}/quiz/${quizId}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

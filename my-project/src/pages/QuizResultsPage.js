@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getQuizAttempt } from '../services/quizSolvingService';
 import { getQuizQuestions } from '../services/questionService';
 import { getQuizById } from '../services/quizService';
+import { QuestionTypes } from '../models/question';
+import { QuizLevelNames } from '../models/quiz';
 import '../styles/QuizResultsPageStyle.css';
 
 function QuizResultsPage() {
@@ -35,9 +37,9 @@ function QuizResultsPage() {
                 getQuizQuestions(attempt.QuizId || attempt.quizId)
             ]);
             
-            console.log('Quiz data received:', quizData); // DEBUG
-            console.log('Questions data received:', questionsData); // DEBUG
-            console.log('Attempt Results:', attempt.Results); // DEBUG
+            console.log('Quiz data received:', quizData);
+            console.log('Questions data received:', questionsData); 
+            console.log('Attempt Results:', attempt.Results); 
             
             setQuiz(quizData);
             setQuestions(questionsData || []);
@@ -109,7 +111,8 @@ function QuizResultsPage() {
     const getCorrectAnswers = (question) => {
         const answerOptions = question.AnswerOptions || question.answerOptions || [];
         
-        if (question.Type === 'FILL_IN_THE_BLANK' || question.type === 'FILL_IN_THE_BLANK') {
+        // Use model constant instead of magic string
+        if (question.Type === QuestionTypes.FILL_IN_THE_BLANK || question.type === QuestionTypes.FILL_IN_THE_BLANK) {
             return answerOptions
                 .filter(option => option.FillInTheBlankCorrectAnswer || option.fillInTheBlankCorrectAnswer)
                 .map(option => option.FillInTheBlankCorrectAnswer || option.fillInTheBlankCorrectAnswer);
@@ -131,7 +134,8 @@ function QuizResultsPage() {
     const getUserAnswers = (question, userResult) => {
         if (!userResult) return [];
         
-        if (question.Type === 'FILL_IN_THE_BLANK' || question.type === 'FILL_IN_THE_BLANK') {
+        // Use model constant instead of magic string
+        if (question.Type === QuestionTypes.FILL_IN_THE_BLANK || question.type === QuestionTypes.FILL_IN_THE_BLANK) {
             return [userResult.FillInTheBlankInput || userResult.fillInTheBlankInput || 'No answer'];
         }
         
@@ -150,6 +154,13 @@ function QuizResultsPage() {
         if (percentage >= 70) return 'good';
         if (percentage >= 50) return 'average';
         return 'poor';
+    };
+
+    // Add a function to get quiz difficulty display
+    const getQuizDifficultyDisplay = () => {
+        if (!quiz) return '';
+        const difficulty = quiz.LevelOfDifficulty || quiz.levelOfDifficulty;
+        return QuizLevelNames[difficulty] || difficulty;
     };
 
     if (loading) {
@@ -181,10 +192,22 @@ function QuizResultsPage() {
     return (
         <div className="results-bg">
             <div className="results-container">
-                {/* Results Header */}
+                {/* Results Header - Enhanced with quiz info */}
                 <div className="results-header">
                     <h1>Quiz Results</h1>
                     <h2>{quiz?.Title || quiz?.title}</h2>
+                    {quiz && (
+                        <div className="quiz-meta">
+                            <span className="quiz-difficulty">
+                                Difficulty: {getQuizDifficultyDisplay()}
+                            </span>
+                            {quiz.Description || quiz.description ? (
+                                <p className="quiz-description">
+                                    {quiz.Description || quiz.description}
+                                </p>
+                            ) : null}
+                        </div>
+                    )}
                 </div>
 
                 {/* Score Summary */}
@@ -216,6 +239,12 @@ function QuizResultsPage() {
                             <span className="label">Time Taken:</span>
                             <span className="value">{formatDuration(attemptData?.Duration || attemptData?.duration)}</span>
                         </div>
+                        <div className="score-item">
+                            <span className="label">Max Possible Score:</span>
+                            <span className="value">
+                                {questions.reduce((sum, q) => sum + (q.Points || q.points || 0), 0)} points
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -228,6 +257,7 @@ function QuizResultsPage() {
                         const isCorrect = isAnswerCorrect(question, userResult);
                         const correctAnswers = getCorrectAnswers(question);
                         const userAnswers = getUserAnswers(question, userResult);
+                        const questionType = question.Type || question.type;
                         
                         return (
                             <div key={question.Id || question.id} className={`question-review ${isCorrect ? 'correct' : 'incorrect'}`}>
@@ -237,6 +267,9 @@ function QuizResultsPage() {
                                             {isCorrect ? '✓' : '✗'}
                                         </span>
                                         Question {index + 1}
+                                        <span className="question-type">
+                                            ({questionType?.replace(/_/g, ' ').toLowerCase() || 'unknown'})
+                                        </span>
                                     </div>
                                     <div className="points-earned">
                                         {(userResult?.Score || userResult?.score || 0)} / {question.Points || question.points} points
@@ -261,7 +294,7 @@ function QuizResultsPage() {
                                     
                                     {!isCorrect && (
                                         <div className="answer-section">
-                                            <h5>Correct Answer:</h5>
+                                            <h5>Correct Answer{correctAnswers.length > 1 ? 's' : ''}:</h5>
                                             <div className="answer-list correct-answer">
                                                 {correctAnswers.map((answer, ansIndex) => (
                                                     <div key={ansIndex} className="answer-item">
@@ -290,6 +323,12 @@ function QuizResultsPage() {
                         className="retake-quiz-btn"
                     >
                         Retake Quiz
+                    </button>
+                    <button 
+                        onClick={() => navigate('/my-results')} 
+                        className="my-results-btn"
+                    >
+                        View All My Results
                     </button>
                 </div>
             </div>
