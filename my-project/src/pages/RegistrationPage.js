@@ -47,11 +47,7 @@ export default function RegisterPage() {
             return false;
         }
 
-        // Password strength validation
-        if (password.length < 6) {
-            setError('Password must be at least 6 characters long.');
-            return false;
-        }
+
 
         // Username validation
         if (username.length < 3) {
@@ -136,7 +132,7 @@ export default function RegisterPage() {
                     />
                     <input
                         type="password"
-                        placeholder="Password (min 6 characters)"
+                        placeholder="Password"
                         value={formData.password}
                         onChange={e => handleInputChange('password', e.target.value)}
                         disabled={isSubmitting}

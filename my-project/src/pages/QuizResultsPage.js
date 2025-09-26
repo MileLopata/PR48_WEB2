@@ -198,7 +198,24 @@ function QuizResultsPage() {
                     <h2>{quiz?.Title || quiz?.title}</h2>
                     {quiz && (
                         <div className="quiz-meta">
-                            <span className="quiz-difficulty">
+                            <span 
+                                className="quiz-difficulty"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.15)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                                    color: '#fff',
+                                    padding: '12px 20px',
+                                    borderRadius: '25px',
+                                    fontWeight: '500',
+                                    fontSize: '0.95rem',
+                                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                                    borderLeft: '4px solid #17a2b8',
+                                    transition: 'all 0.3s ease',
+                                    textAlign: 'center',
+                                    display: 'inline-block'
+                                }}
+                            >
                                 Difficulty: {getQuizDifficultyDisplay()}
                             </span>
                             {quiz.Description || quiz.description ? (

@@ -40,11 +40,6 @@ export default function LoginPage() {
             return false;
         }
 
-        if (password.length < 3) {
-            setError('Password is too short.');
-            return false;
-        }
-
         return true;
     };
 

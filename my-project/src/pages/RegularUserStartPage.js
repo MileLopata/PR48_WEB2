@@ -96,12 +96,23 @@ function RegularUserStartPage() {
             });
         }
 
-        // Filter by difficulty - use model constants for comparison
+        // Filter by difficulty - handle both string and numeric values
         if (selectedDifficulty) {
             const difficultyValue = parseInt(selectedDifficulty);
-            filtered = filtered.filter(quiz => 
-                (quiz.levelOfDifficulty || quiz.LevelOfDifficulty) === difficultyValue
-            );
+            
+            filtered = filtered.filter(quiz => {
+                const quizDifficulty = quiz.levelOfDifficulty || quiz.LevelOfDifficulty;
+                
+                // Handle string difficulties (like "HARD", "EASY") 
+                if (typeof quizDifficulty === 'string') {
+                    // Convert string difficulty to number using QuizDifficultyLevels mapping
+                    const stringToNumber = QuizDifficultyLevels[quizDifficulty];
+                    return stringToNumber === difficultyValue;
+                }
+                
+                // Handle numeric difficulties (legacy support)
+                return quizDifficulty === difficultyValue;
+            });
         }
 
         setFilteredQuizzes(filtered);

@@ -117,6 +117,44 @@
     font-size: 1.5rem;
 }
 
+.quiz-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.quiz-difficulty {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    width: fit-content;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 20px;
+}
+
+.quiz-description {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    padding: 10px 15px !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    font-style: italic !important;
+    font-weight: 600 !important;
+    border-left: 4px solid #667eea !important;
+    border: 1px solid rgba(102, 126, 234, 0.3) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    max-width: 400px;
+    line-height: 1.4;
+}
+
 .attempt-date {
     color: #666;
     font-size: 0.9rem;
